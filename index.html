@@ -1211,11 +1211,15 @@ document.getElementById('buyForm').addEventListener('submit', function(e){
   payStep.classList.add('open');
   payStep.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'start'});
 });
-// Order submit → license server (Apps Script v3) + WhatsApp. ONE action:
-// the POST goes to the license server exactly as before, and on success the
-// same prefilled WhatsApp order message opens in a new tab. The response is
-// opaque (no-cors), so a fetch that does not throw counts as submitted. If
-// it throws, the buyer is told to retry and WhatsApp is NOT opened.
+// Order submit → WhatsApp first (synchronously), then license server
+// (Apps Script v3). ONE action: the WhatsApp chat with the prefilled order
+// message opens IMMEDIATELY on the click — synchronously, inside the click
+// handler, BEFORE the fetch starts — so the browser treats it as a direct
+// user-gesture popup and never blocks it. The POST then goes to the license
+// server exactly as before; the response is opaque (no-cors), so a fetch
+// that does not throw counts as submitted. If it throws, the buyer is told
+// to retry — the WhatsApp tab is already open with the full order details,
+// so nothing is lost.
 var orderSubmitBtn = document.getElementById('orderSubmitBtn');
 if(orderSubmitBtn){
   orderSubmitBtn.addEventListener('click', function(){
@@ -1245,6 +1249,9 @@ if(orderSubmitBtn){
       'Payment number: 01799137986',
       selectedMethod + ' Transaction ID: ' + trx
     ];
+    // Open WhatsApp NOW — synchronously in this click, before the fetch —
+    // so no popup blocker can stop it.
+    window.open('https://wa.me/8801799137986?text=' + encodeURIComponent(lines.join('\n')), '_blank');
     orderSubmitBtn.disabled = true;
     result.style.color = '#A7A7A0';
     result.textContent = 'Order submit hocche…';
@@ -1254,7 +1261,6 @@ if(orderSubmitBtn){
       headers: {'Content-Type': 'text/plain'},
       body: JSON.stringify(payload)
     }).then(function(){
-      window.open('https://wa.me/8801799137986?text=' + encodeURIComponent(lines.join('\n')), '_blank');
       result.style.color = '#6FE8C0';
       result.textContent = 'Order submit hoyeche! Payment verify hole apnar email e license key + extension file er link chole jabe.';
       orderSubmitBtn.disabled = false;
