@@ -839,11 +839,10 @@ section h2.lit,.about-copy p.lead.lit{text-shadow:0 0 24px rgba(111,232,192,.28)
         </div>
         <button type="button" class="copy-btn" id="copyNumberBtn">Tap to copy</button>
       </div>
-      <p id="payInstruction"><b>bKash</b> diye <b>Send Money</b> korun <b>01799137986</b> number e. Payment hoye gele niche <b>Transaction ID</b> ta boshan, tarpor WhatsApp button e click kore order ta pathiye din. <b>Approve hole key + file apnar email e chole jabe.</b></p>
+      <p id="payInstruction"><b>bKash</b> diye <b>Send Money</b> korun <b>01799137986</b> number e. Payment hoye gele niche <b>Transaction ID</b> ta boshan, tarpor Submit order button e click kore order ta pathiye din. <b>Approve hole key + file apnar email e chole jabe.</b></p>
       <label for="bTrx" id="bTrxLabel" style="display:block;font-size:13px;font-weight:700;margin:20px 0 8px;color:#D9D9D2">bKash Transaction ID *</label>
       <input id="bTrx" placeholder="e.g. AB12CD34EF" style="width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:#101010;color:var(--text);font-size:15px;font-family:inherit;outline:none">
       <button class="wa-send magnetic" type="button" id="orderSubmitBtn">Submit order →</button>
-      <button class="wa-send magnetic" type="button" id="waSendBtn">Send order on WhatsApp →</button>
       <p id="payResult" role="status"></p>
     </div>
   </div>
@@ -1164,7 +1163,7 @@ function setPayMethod(method){
   var trxLabel = document.getElementById('bTrxLabel');
   if(trxLabel) trxLabel.textContent = method + ' Transaction ID *';
   var instr = document.getElementById('payInstruction');
-  if(instr) instr.innerHTML = '<b>' + method + '</b> diye <b>Send Money</b> korun <b>01799137986</b> number e. Payment hoye gele niche <b>Transaction ID</b> ta boshan, tarpor WhatsApp button e click kore order ta pathiye din. <b>Approve hole key + file apnar email e chole jabe.</b>';
+  if(instr) instr.innerHTML = '<b>' + method + '</b> diye <b>Send Money</b> korun <b>01799137986</b> number e. Payment hoye gele niche <b>Transaction ID</b> ta boshan, tarpor Submit order button e click kore order ta pathiye din. <b>Approve hole key + file apnar email e chole jabe.</b>';
 }
 document.querySelectorAll('.pay-method').forEach(function(btn){
   btn.addEventListener('click', function(){ setPayMethod(btn.getAttribute('data-method')); });
@@ -1212,9 +1211,11 @@ document.getElementById('buyForm').addEventListener('submit', function(e){
   payStep.classList.add('open');
   payStep.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'start'});
 });
-// Order submit → license server (Apps Script v3). The response is opaque
-// (no-cors), so a fetch that does not throw counts as submitted. If it
-// throws, the buyer is told to retry or fall back to the WhatsApp button.
+// Order submit → license server (Apps Script v3) + WhatsApp. ONE action:
+// the POST goes to the license server exactly as before, and on success the
+// same prefilled WhatsApp order message opens in a new tab. The response is
+// opaque (no-cors), so a fetch that does not throw counts as submitted. If
+// it throws, the buyer is told to retry and WhatsApp is NOT opened.
 var orderSubmitBtn = document.getElementById('orderSubmitBtn');
 if(orderSubmitBtn){
   orderSubmitBtn.addEventListener('click', function(){
@@ -1235,6 +1236,15 @@ if(orderSubmitBtn){
       trxId: trx,
       amount: '100'
     };
+    var lines = [
+      'Assalamu Alaikum, ami ekta extension kinte chai.',
+      'Name: ' + order.name,
+      'Email (key pathaben): ' + order.email,
+      'Product: ' + order.product,
+      'Payment method: ' + selectedMethod + ' Send Money ৳100',
+      'Payment number: 01799137986',
+      selectedMethod + ' Transaction ID: ' + trx
+    ];
     orderSubmitBtn.disabled = true;
     result.style.color = '#A7A7A0';
     result.textContent = 'Order submit hocche…';
@@ -1244,37 +1254,17 @@ if(orderSubmitBtn){
       headers: {'Content-Type': 'text/plain'},
       body: JSON.stringify(payload)
     }).then(function(){
+      window.open('https://wa.me/8801799137986?text=' + encodeURIComponent(lines.join('\n')), '_blank');
       result.style.color = '#6FE8C0';
       result.textContent = 'Order submit hoyeche! Payment verify hole apnar email e license key + extension file er link chole jabe.';
       orderSubmitBtn.disabled = false;
     }).catch(function(){
       result.style.color = '#FF9D8A';
-      result.textContent = 'Order submit hote problem hoyeche. Abar try korun, ba WhatsApp button diye order ta pathiye din.';
+      result.textContent = 'Order submit hote problem hoyeche. Abar try korun.';
       orderSubmitBtn.disabled = false;
     });
   });
 }
-document.getElementById('waSendBtn').addEventListener('click', function(){
-  var trx = document.getElementById('bTrx').value.trim();
-  var result = document.getElementById('payResult');
-  if(!trx){
-    result.textContent = 'Age ' + selectedMethod + ' Transaction ID ta boshan.';
-    result.style.color = '#FF9D8A';
-    return;
-  }
-  var lines = [
-    'Assalamu Alaikum, ami ekta extension kinte chai.',
-    'Name: ' + order.name,
-    'Email (key pathaben): ' + order.email,
-    'Product: ' + order.product,
-    'Payment method: ' + selectedMethod + ' Send Money ৳100',
-    'Payment number: 01799137986',
-    selectedMethod + ' Transaction ID: ' + trx
-  ];
-  result.style.color = '#6FE8C0';
-  result.textContent = 'WhatsApp khulche — message ta send kore din. Approve hole key + file apnar email e chole jabe.';
-  window.open('https://wa.me/8801799137986?text=' + encodeURIComponent(lines.join('\n')), '_blank');
-});
 </script>
 </body>
 </html>
