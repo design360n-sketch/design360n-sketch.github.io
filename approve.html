@@ -9,6 +9,7 @@
   body{font-family:sans-serif;background:#0B0B0B;color:#fff;max-width:560px;margin:60px auto;padding:24px;text-align:center}
   h1{font-size:22px;color:#6FE8C0}
   p{font-size:16px;line-height:1.6}
+  a.btn{display:inline-block;background:#2ED3A3;color:#000000;font-weight:bold;font-size:19px;padding:16px 32px;border-radius:8px;text-decoration:none;margin:12px 0}
   a{color:#6FE8C0}
 </style>
 <script>
@@ -19,21 +20,28 @@
   if (!t || !c) {
     document.addEventListener('DOMContentLoaded', function () {
       document.getElementById('msg').textContent = 'Ei link-e kono order nei.';
+      document.getElementById('btn').style.display = 'none';
     });
     return;
   }
   var url = 'https://script.google.com/macros/s/AKfycbx5HH2LS6FDoHpnKoIM9tDYfNqQ1CxXCe2iFO1MColMUSpacgwnzdO95mwoyLHFovtvvw/exec'
     + '?action=approve&trxId=' + encodeURIComponent(t) + '&code=' + encodeURIComponent(c);
-  var a = document.getElementById('manual');
-  if (a) a.href = url;
+  // Put the real approve URL on the button first, so a tap always works
+  // even if the automatic redirect below is blocked on the phone.
+  document.addEventListener('DOMContentLoaded', function () {
+    var b = document.getElementById('btn');
+    if (b) b.href = url;
+  });
+  // Automatic redirect (desktop + most phones). If it is blocked, the
+  // green button above is the manual way — same destination.
   window.location.replace(url);
 })();
 </script>
 </head>
 <body>
 <h1>Approving your order…</h1>
-<p id="msg">Apni approve page-e jacchen. Na gele nicher link-e tap korun:</p>
-<p><a id="manual" href="#">Approve Order</a></p>
+<p id="msg">Page-ta nije theke approve page-e na gele, nicher sobuj button-e tap korun:</p>
+<p><a class="btn" id="btn" href="#">Approve Order</a></p>
 <p>— Team Design360n</p>
 </body>
 </html>
