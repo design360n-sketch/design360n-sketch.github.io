@@ -225,7 +225,7 @@ $('q').oninput=()=>{ $('qVal').textContent=$('q').value; };
 $('go').onclick=()=>{
   if(!srcImg)return;
   const q=parseInt($('q').value,10)/100, mw=parseInt($('mw').value,10)||0;
-  const fmt=$('fmt').value; outExt=fmt==='image/jpeg'?'jpg':fmt==='image/webp'?'webp':'png';
+  const mime=$('fmt').value; outExt=mime==='image/jpeg'?'jpg':mime==='image/webp'?'webp':'png';
   let w=srcImg.naturalWidth,h=srcImg.naturalHeight;
   if(mw>0&&w>mw){ h=Math.round(h*mw/w); w=mw; }
   const cv=document.createElement('canvas'); cv.width=w; cv.height=h;
@@ -239,7 +239,7 @@ $('go').onclick=()=>{
     $('info').textContent='Compressed: '+w+' × '+h+' px, '+fmt(b.size)+' — '+saved+'% smaller than the original ('+fmt(srcFile.size)+').';
     $('dl').disabled=false;
     setStatus('Done — your smaller image is ready below.');
-  },fmt,fmt==='image/png'?undefined:q);
+  },mime,mime==='image/png'?undefined:q);
 };
 $('dl').onclick=()=>{ if(outBlob) downloadBlob(outBlob, srcName+'-compressed.'+outExt); };
 

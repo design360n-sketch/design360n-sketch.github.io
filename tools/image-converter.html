@@ -222,10 +222,10 @@ function onLoaded(){
 $('q').oninput=()=>{ $('qVal').textContent=$('q').value; };
 $('go').onclick=()=>{
   if(!srcImg)return;
-  const fmt=$('fmt').value; outExt=fmt==='image/jpeg'?'jpg':fmt==='image/webp'?'webp':'png';
+  const mime=$('fmt').value; outExt=mime==='image/jpeg'?'jpg':mime==='image/webp'?'webp':'png';
   const cv=document.createElement('canvas'); cv.width=srcImg.naturalWidth; cv.height=srcImg.naturalHeight;
   const c=cv.getContext('2d');
-  if(fmt==='image/jpeg'){ c.fillStyle='#ffffff'; c.fillRect(0,0,cv.width,cv.height); }
+  if(mime==='image/jpeg'){ c.fillStyle='#ffffff'; c.fillRect(0,0,cv.width,cv.height); }
   c.drawImage(srcImg,0,0);
   cv.toBlob(b=>{
     if(!b){setStatus('Conversion failed — try another image.');return;}
@@ -235,7 +235,7 @@ $('go').onclick=()=>{
     $('info').textContent='Converted to '+outExt.toUpperCase()+' — '+fmt(b.size)+'.';
     $('dl').disabled=false;
     setStatus('Done — your converted image is ready below.');
-  },fmt,fmt==='image/png'?undefined:parseInt($('q').value,10)/100);
+  },mime,mime==='image/png'?undefined:parseInt($('q').value,10)/100);
 };
 $('dl').onclick=()=>{ if(outBlob) downloadBlob(outBlob, srcName+'.'+outExt); };
 
