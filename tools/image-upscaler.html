@@ -181,11 +181,11 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:30px 0;color:var
 <p class="eyebrow">FREE TOOL — DESIGN360N &nbsp;·&nbsp; NO SIGNUP, NO WATERMARK</p>
 <div class="tool-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></div>
 <h1>Free Image Upscaler</h1>
-<p class="lead">Make a small photo bigger without losing it to blur. Fast mode enlarges 2x or 4x in your browser. AI mode upscales with Gemini using your own free API key — Fast mode keeps your photo on your device, AI mode sends it to Google’s Gemini API with your key.</p>
+<p class="lead">Make a small photo bigger without losing it to blur. Fast mode enlarges 2x or 4x in your browser. AI mode upscales with Gemini — free for 3 uses a day, no key needed. Fast mode keeps your photo on your device; AI mode sends it to Design360n’s server.</p>
 </div>
 <section><div class="card">
 <label class="drop" for="file"><span class="drop-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6FE8C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M6 10l6-6 6 6"/><path d="M4 20h16"/></svg></span>Choose an image or drop it here
-<small>JPG, PNG or WebP — processed in your browser, never uploaded</small></label>
+<small>JPG, PNG or WebP — Fast mode never leaves your browser; AI mode sends it to Design360n’s server</small></label>
 <input type="file" id="file" accept="image/*" hidden>
 <div class="controls"><label>Mode
         <select id="mode"><option value="fast">Fast — in-browser (2x / 4x)</option><option value="ai">AI — Gemini (no key needed)</option></select></label>
@@ -213,7 +213,7 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:30px 0;color:var
 <div class="dl-row"><button class="btn" id="dl" disabled>Download result ↓</button>
 <a class="btn ghost" href="https://design360n-sketch.github.io/#contact">Need a designer? Contact me →</a></div>
 </div></section>
-<section><h2>How to use</h2><div class="steps"><div class="card step"><b>1. Upload your image</b><p>Choose a JPG, PNG or WebP photo from your device.</p></div><div class="card step"><b>2. Pick a mode</b><p>Fast mode enlarges 2x or 4x in your browser. AI mode upscales with Gemini — get a free key from Google AI Studio and save it in your browser.</p></div><div class="card step"><b>3. Download the PNG</b><p>Save the enlarged image and use it anywhere — print, post or profile.</p></div></div></section>
+<section><h2>How to use</h2><div class="steps"><div class="card step"><b>1. Upload your image</b><p>Choose a JPG, PNG or WebP photo from your device.</p></div><div class="card step"><b>2. Pick a mode</b><p>Fast mode enlarges 2x or 4x in your browser. AI mode upscales with Gemini — free for 3 uses a day, no key needed.</p></div><div class="card step"><b>3. Download the PNG</b><p>Save the enlarged image and use it anywhere — print, post or profile.</p></div></div></section>
 <section><h2>Questions about image upscaler</h2><div class="faq-item"><h3>Is this image upscaler really free?</h3><p>Yes. Fast mode is free with no signup and no watermark. AI mode is free for 3 uses a day across the AI tools (upscale, expand and AI backgrounds) — no key needed, it runs on Design360n’s server. A $1/month paid key gives unlimited AI use.</p></div><div class="faq-item"><h3>How do I get unlimited AI use?</h3><p>Buy AI Tools Unlimited ($1/month) from the homepage, then enter your Design360n paid license key (D360-XXXX-XXXX) in the Paid key box and click Unlock unlimited.</p></div><div class="faq-item"><h3>How big is the AI result?</h3><p>Gemini (Nano Banana) returns about 1024px on the long side, so AI mode is best for small photos. For big photos use Fast mode (2x / 4x).</p></div><div class="faq-item"><h3>Will upscaling make my photo sharper?</h3><p>Fast mode makes the photo bigger with smooth high-quality resizing, but it cannot add detail that was never in the original photo. AI mode regenerates the image with Gemini, so it can add detail — and it can also change small details.</p></div><div class="faq-item"><h3>Does the AI result have a watermark?</h3><p>Google adds an invisible SynthID watermark to AI-generated and AI-edited images. You cannot see it — it only marks the image as AI-made.</p></div></section>
 <section><h2>More free tools</h2><div class="other"><a href="ai-image-expander.html">AI Image Expander</a><a href="background-remover.html">Background Remover</a><a href="image-compressor.html">Image Compressor</a><a href="image-converter.html">Image Converter</a><a href="image-resizer.html">Image Resizer</a><a href="color-palette-extractor.html">Colour Palette Extractor</a></div></section>
 <section><div class="card" style="text-align:center">
@@ -358,7 +358,6 @@ $('mode').onchange=()=>{
   $('scale').disabled=ai;
   $('go').textContent=ai?'AI upscale with Gemini →':'Upscale image →';
 };
-refreshKeyUI();
 aiWirePaidUI(); aiRefreshFreeUI();
 $('go').onclick=()=>{
   if(!srcImg)return;
