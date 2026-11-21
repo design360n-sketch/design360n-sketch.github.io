@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Free Image Upscaler Online | Design360n</title>
-<meta name="description" content="Free image upscaler online by Design360n. Enlarge your photo 2x or 4x in your browser — no upload, no signup, download as PNG.">
+<meta name="description" content="Free image upscaler online by Design360n. Enlarge 2x or 4x in your browser, or AI-upscale with Gemini using your free API key. No signup, no watermark.">
 <meta name="keywords" content="Image Upscaler, free image upscaler, Image Upscaler online, Noyon Mia, Design360n, Graphic Designer Bangladesh">
 <meta name="author" content="Mohammad Noyon Mia — Design360n">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://design360n-sketch.github.io/tools/image-upscaler.html">
 <meta property="og:title" content="Free Image Upscaler Online | Design360n">
-<meta property="og:description" content="Free image upscaler online by Design360n. Enlarge your photo 2x or 4x in your browser — no upload, no signup, download as PNG.">
+<meta property="og:description" content="Free image upscaler online by Design360n. Enlarge 2x or 4x in your browser, or AI-upscale with Gemini using your free API key. No signup, no watermark.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Design360n">
 <meta property="og:url" content="https://design360n-sketch.github.io/tools/image-upscaler.html">
@@ -24,7 +24,7 @@
       "name": "Image Upscaler",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "Any (web browser)",
-      "description": "Free image upscaler online by Design360n. Enlarge your photo 2x or 4x in your browser — no upload, no signup, download as PNG.",
+      "description": "Free image upscaler online by Design360n. Enlarge 2x or 4x in your browser, or AI-upscale with Gemini using your free API key. No signup, no watermark.",
       "url": "https://design360n-sketch.github.io/tools/image-upscaler.html",
       "offers": {
         "@type": "Offer",
@@ -79,7 +79,23 @@
           "name": "Is this image upscaler really free?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. It is free, with no signup and no watermark. Your photo is processed in your browser."
+            "text": "Yes. Fast mode is free with no signup and no watermark. AI mode uses your own free Gemini API key — Google’s free tier allows about 500 images a day, no card needed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the free AI upscale work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Choose AI mode, get a free key from Google AI Studio (aistudio.google.com/apikey) and save it in your browser. The key never goes to Design360n — it stays in your browser and is only sent to Google’s Gemini API with your photo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How big is the AI result?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Gemini (Nano Banana) returns about 1024px on the long side, so AI mode is best for small photos. For big photos use Fast mode (2x / 4x)."
           }
         },
         {
@@ -87,15 +103,15 @@
           "name": "Will upscaling make my photo sharper?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Upscaling makes the photo bigger with smooth high-quality resizing. It cannot add detail that was never in the original photo."
+            "text": "Fast mode makes the photo bigger with smooth high-quality resizing, but it cannot add detail that was never in the original photo. AI mode regenerates the image with Gemini, so it can add detail — and it can also change small details."
           }
         },
         {
           "@type": "Question",
-          "name": "What image sizes can I upscale?",
+          "name": "Does the AI result have a watermark?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Any JPG, PNG or WebP. A 2x upscale doubles the width and height; 4x makes it four times bigger."
+            "text": "Google adds an invisible SynthID watermark to AI-generated and AI-edited images. You cannot see it — it only marks the image as AI-made."
           }
         }
       ]
@@ -156,14 +172,26 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:28px 0;color:var
 <p class="crumbs"><a href="https://design360n-sketch.github.io/">Home</a> &nbsp;/&nbsp; Free Tools &nbsp;/&nbsp; Image Upscaler</p>
 <p class="eyebrow">FREE TOOL — DESIGN360N &nbsp;·&nbsp; NO SIGNUP, NO WATERMARK</p>
 <h1>Free Image Upscaler</h1>
-<p class="lead">Make a small photo bigger without losing it to blur. Upload your image, pick 2x or 4x, and download the enlarged PNG — free, in your browser, your photo never leaves your device.</p>
+<p class="lead">Make a small photo bigger without losing it to blur. Fast mode enlarges 2x or 4x in your browser. AI mode upscales with Gemini using your own free API key — Fast mode keeps your photo on your device, AI mode sends it to Google’s Gemini API with your key.</p>
 </div>
 <section><div class="card">
 <label class="drop" for="file">Choose an image or drop it here
 <small>JPG, PNG or WebP — processed in your browser, never uploaded</small></label>
 <input type="file" id="file" accept="image/*" hidden>
-<div class="controls"><label>Enlarge by
+<div class="controls"><label>Mode
+        <select id="mode"><option value="fast">Fast — in-browser (2x / 4x)</option><option value="ai">AI — Gemini (free key)</option></select></label>
+        <label>Enlarge by
         <select id="scale"><option value="2">2x — double size</option><option value="4">4x — four times bigger</option></select></label>
+        <div id="keyBox" style="display:none">
+        <label>Your free Gemini API key
+        <input id="gkey" type="password" placeholder="AIza..." autocomplete="off" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0f1417;color:var(--ink);margin-top:6px"></label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+        <button class="btn ghost" id="saveKey" type="button">Save key in this browser</button>
+        <button class="btn ghost" id="delKey" type="button" style="display:none">Remove key</button>
+        <a class="btn ghost" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Get a free key ↗</a>
+        </div>
+        <p class="hint" id="keyState">Your key stays only in your browser — it is never sent to Design360n. Free tier: about 500 images a day.</p>
+        </div>
         <button class="btn" id="go">Upscale image →</button></div>
 <p id="status">Choose an image to start.</p>
 <div class="previews">
@@ -176,8 +204,8 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:28px 0;color:var
 <div class="dl-row"><button class="btn" id="dl" disabled>Download result ↓</button>
 <a class="btn ghost" href="https://design360n-sketch.github.io/#contact">Need a designer? Contact me →</a></div>
 </div></section>
-<section><h2>How to use</h2><div class="steps"><div class="card step"><b>1. Upload your image</b><p>Choose a JPG, PNG or WebP photo from your device.</p></div><div class="card step"><b>2. Pick 2x or 4x</b><p>Choose how much bigger you want it, then click Upscale image.</p></div><div class="card step"><b>3. Download the PNG</b><p>Save the enlarged image and use it anywhere — print, post or profile.</p></div></div></section>
-<section><h2>Questions about image upscaler</h2><div class="faq-item"><h3>Is this image upscaler really free?</h3><p>Yes. It is free, with no signup and no watermark. Your photo is processed in your browser.</p></div><div class="faq-item"><h3>Will upscaling make my photo sharper?</h3><p>Upscaling makes the photo bigger with smooth high-quality resizing. It cannot add detail that was never in the original photo.</p></div><div class="faq-item"><h3>What image sizes can I upscale?</h3><p>Any JPG, PNG or WebP. A 2x upscale doubles the width and height; 4x makes it four times bigger.</p></div></section>
+<section><h2>How to use</h2><div class="steps"><div class="card step"><b>1. Upload your image</b><p>Choose a JPG, PNG or WebP photo from your device.</p></div><div class="card step"><b>2. Pick a mode</b><p>Fast mode enlarges 2x or 4x in your browser. AI mode upscales with Gemini — get a free key from Google AI Studio and save it in your browser.</p></div><div class="card step"><b>3. Download the PNG</b><p>Save the enlarged image and use it anywhere — print, post or profile.</p></div></div></section>
+<section><h2>Questions about image upscaler</h2><div class="faq-item"><h3>Is this image upscaler really free?</h3><p>Yes. Fast mode is free with no signup and no watermark. AI mode uses your own free Gemini API key — Google’s free tier allows about 500 images a day, no card needed.</p></div><div class="faq-item"><h3>How does the free AI upscale work?</h3><p>Choose AI mode, get a free key from Google AI Studio (aistudio.google.com/apikey) and save it in your browser. The key never goes to Design360n — it stays in your browser and is only sent to Google’s Gemini API with your photo.</p></div><div class="faq-item"><h3>How big is the AI result?</h3><p>Gemini (Nano Banana) returns about 1024px on the long side, so AI mode is best for small photos. For big photos use Fast mode (2x / 4x).</p></div><div class="faq-item"><h3>Will upscaling make my photo sharper?</h3><p>Fast mode makes the photo bigger with smooth high-quality resizing, but it cannot add detail that was never in the original photo. AI mode regenerates the image with Gemini, so it can add detail — and it can also change small details.</p></div><div class="faq-item"><h3>Does the AI result have a watermark?</h3><p>Google adds an invisible SynthID watermark to AI-generated and AI-edited images. You cannot see it — it only marks the image as AI-made.</p></div></section>
 <section><h2>More free tools</h2><div class="other"><a href="background-remover.html">Background Remover</a><a href="image-compressor.html">Image Compressor</a><a href="image-converter.html">Image Converter</a><a href="image-resizer.html">Image Resizer</a><a href="color-palette-extractor.html">Colour Palette Extractor</a></div></section>
 <section><div class="card" style="text-align:center">
 <h2 style="margin-bottom:10px">Need this done professionally?</h2>
@@ -215,11 +243,87 @@ function downloadBlob(b,name){
 let outCv=null;
 function onLoaded(){
   $('before').src=srcImg.src;
-  setStatus('Loaded '+srcImg.naturalWidth+' × '+srcImg.naturalHeight+' px. Pick 2x or 4x, then Upscale image.');
+  setStatus('Loaded '+srcImg.naturalWidth+' × '+srcImg.naturalHeight+' px. Pick a mode, then Upscale image.');
   $('go').disabled=false;
 }
+function closestAR(w,h){
+  const r=w/h, list=[['1:1',1],['3:2',1.5],['2:3',0.667],['3:4',0.75],['4:3',1.333],['4:5',0.8],['5:4',1.25],['9:16',0.5625],['16:9',1.778],['21:9',2.333]];
+  let best=list[0],bd=1e9;
+  list.forEach(x=>{const d=Math.abs(r-x[1]);if(d<bd){bd=d;best=x;}});
+  return best[0];
+}
+function prepInput(){
+  return new Promise(res=>{
+    if(srcFile.size<=6*1024*1024){
+      const r=new FileReader();
+      r.onload=()=>{const d=r.result;res({mime:srcFile.type||'image/png',data:d.split(',')[1]});};
+      r.readAsDataURL(srcFile);
+    } else {
+      const c=document.createElement('canvas'), m=Math.max(srcImg.naturalWidth,srcImg.naturalHeight), s=Math.min(1,2048/m);
+      c.width=Math.round(srcImg.naturalWidth*s); c.height=Math.round(srcImg.naturalHeight*s);
+      c.getContext('2d').drawImage(srcImg,0,0,c.width,c.height);
+      const d=c.toDataURL('image/jpeg',0.85);
+      res({mime:'image/jpeg',data:d.split(',')[1]});
+    }
+  });
+}
+function aiUpscale(){
+  const key=((localStorage.getItem('d360n_gemini_key')||'').trim()||$('gkey').value.trim());
+  if(!key){setStatus('Age upore "Get a free key" theke free Gemini API key nin, tarpor Save korun.');return;}
+  if(!srcFile){setStatus('Age ekta chobi upload korun.');return;}
+  setStatus('AI upscale cholche — 10 theke 30 second lagte pare…');
+  $('go').disabled=true;
+  prepInput().then(inp=>{
+    const ar=closestAR(srcImg.naturalWidth,srcImg.naturalHeight);
+    return fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent?key='+encodeURIComponent(key),{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({contents:[{parts:[{text:'Upscale and enhance this image to high resolution. Keep the exact same composition, subject, colours and details — only increase the resolution and sharpness. Do not change, add or remove anything.'},{inlineData:{mimeType:inp.mime,data:inp.data}}]}],generationConfig:{responseModalities:['TEXT','IMAGE'],imageConfig:{aspectRatio:ar}}})
+    });
+  }).then(r=>{
+    if(!r.ok){return r.json().then(j=>{const e=(j.error&&j.error.message)||('HTTP '+r.status);
+      if(r.status===400) throw new Error('Key ta thik na — "Get a free key" theke notun key niye abar try korun.');
+      if(r.status===429) throw new Error('Free limit sesh (daily quota) — kal abar try korun, ba Fast mode use korun.');
+      throw new Error('Gemini error: '+e);});}
+    return r.json();
+  }).then(j=>{
+    const cand=(j.candidates||[])[0];
+    const parts=(cand&&cand.content&&cand.content.parts)||[];
+    let img=null;
+    parts.forEach(p=>{if(p.inlineData&&p.inlineData.data) img=p.inlineData;});
+    if(!img) throw new Error('Gemini chobi banate dey nai (safety filter hote pare) — onno chobi diye try korun, ba Fast mode use korun.');
+    const url='data:'+(img.mimeType||'image/png')+';base64,'+img.data;
+    const im=new Image();
+    im.onload=()=>{
+      outCv=document.createElement('canvas');
+      outCv.width=im.naturalWidth; outCv.height=im.naturalHeight;
+      outCv.getContext('2d').drawImage(im,0,0);
+      $('after').src=url;
+      $('afterWrap').style.display='block';
+      $('info').textContent='AI upscale done — '+outCv.width+' × '+outCv.height+' px (Gemini output ~1024px). Boro chobir jonno Fast mode valo.';
+      $('dl').disabled=false;
+      setStatus('AI upscale done ✓');
+    };
+    im.onerror=()=>{setStatus('✗ AI result load hoy nai — abar try korun.');};
+    im.src=url;
+  }).catch(err=>{setStatus('✗ '+err.message);}).finally(()=>{$('go').disabled=false;});
+}
+function refreshKeyUI(){
+  const k=localStorage.getItem('d360n_gemini_key');
+  if(k){$('gkey').value=k;$('keyState').textContent='Key save kora ache ei browser-e ✓ — key sudhu apnar browser-e thake, Design360n-e pathano hoy na.';$('delKey').style.display='';}
+  else{$('keyState').textContent='Apnar key sudhu apnar browser-e thakbe — Design360n-er server-e kokhono jabe na. Free tier: din-e pray 500-ta chobi.';$('delKey').style.display='none';}
+}
+$('saveKey').onclick=()=>{const k=$('gkey').value.trim();if(!k){setStatus('Key khali — age key paste korun.');return;}localStorage.setItem('d360n_gemini_key',k);refreshKeyUI();setStatus('Key save holo ✓');};
+$('delKey').onclick=()=>{localStorage.removeItem('d360n_gemini_key');$('gkey').value='';refreshKeyUI();setStatus('Key muche fela holo.');};
+$('mode').onchange=()=>{
+  const ai=$('mode').value==='ai';
+  $('keyBox').style.display=ai?'block':'none';
+  $('scale').disabled=ai;
+  $('go').textContent=ai?'AI upscale with Gemini →':'Upscale image →';
+};
+refreshKeyUI();
 $('go').onclick=()=>{
   if(!srcImg)return;
+  if($('mode').value==='ai'){aiUpscale();return;}
   const s=parseInt($('scale').value,10);
   outCv=document.createElement('canvas');
   outCv.width=srcImg.naturalWidth*s; outCv.height=srcImg.naturalHeight*s;
