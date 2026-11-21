@@ -441,8 +441,8 @@ function applyBg(style){
     im.src=url;
   }).catch(err=>{
     const m=err.message||'';
-    // Free limit / bad paid key: no fallback — the $1/month paywall stays.
-    if(m.indexOf('free AI use sesh')!==-1||m.indexOf('Paid key')!==-1){ setStatus('✗ '+m); return; }
+    // Free limit / bad paid key / Gemini quota limit: no fallback — the $1/month paywall stays.
+    if(m.indexOf('free AI use sesh')!==-1||m.indexOf('Paid key')!==-1||m.indexOf('daily limit sesh')!==-1){ setStatus('✗ '+m); return; }
     // Server outage: keyless fallback — free Pollinations background, composited here.
     setStatus('AI server busy — free background diye try korchi…');
     pollinationsBg(style, custom);
