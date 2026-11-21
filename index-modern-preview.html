@@ -350,6 +350,24 @@ padding:8px 12px;font-size:15px;cursor:pointer;font-family:inherit}
 .grid .card:nth-child(2){transition-delay:.05s}.grid .card:nth-child(3){transition-delay:.1s}.grid .card:nth-child(4){transition-delay:.15s}
 .card{transition:border-color .2s,transform .2s,box-shadow .2s}
 .card:hover{box-shadow:0 14px 34px rgba(0,0,0,.4)}
+/* Ekushey carousel — premium, one poster at a time */
+.carousel-sec{padding:72px 0 64px}
+.carousel-sec .lede{margin-bottom:30px}
+.car-stage{position:relative;max-width:780px;margin:0 auto;border-radius:28px;overflow:hidden;border:1px solid var(--line);background:#0e0e0e;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.car-viewport{position:relative;height:min(72vh,660px)}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease;pointer-events:none;margin:0}
+.slide.active{opacity:1;pointer-events:auto}
+.slide img{width:100%;height:100%;object-fit:contain;display:block}
+.car-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(11,11,11,.55);color:#fff;font-size:20px;line-height:1;cursor:pointer;backdrop-filter:blur(6px);transition:background .2s}
+.car-btn:hover{background:rgba(46,211,163,.9);color:var(--text)}
+#carPrev{left:14px}#carNext{right:14px}
+.car-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:20px;flex-wrap:wrap}
+.car-count{font-size:14px;color:var(--muted);min-width:190px;text-align:center}
+.car-count b{color:var(--text);font-weight:600}
+.car-dots{display:flex;gap:8px}
+.car-dot{width:9px;height:9px;border-radius:50%;border:0;background:rgba(255,255,255,.28);cursor:pointer;padding:0;transition:background .2s,transform .2s}
+.car-dot.active{background:var(--mint);transform:scale(1.25)}
+@media (max-width:640px){.car-viewport{height:min(62vh,500px)}.car-btn{width:38px;height:38px}}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.hero-anim{animation:none}.js .rv{opacity:1;transform:none;transition:none}}
 .tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--ink);background:var(--mint);
 border-radius:999px;padding:3px 9px;margin-left:8px;vertical-align:2px}
@@ -455,6 +473,16 @@ footer{border-top:1px solid var(--line);padding:48px 0 56px}
 </div></div></header>
 
 <main id="top">
+<section class="carousel-sec" id="featured"><div class="wrap"><p class="eyebrow">Featured Work</p><h2>Ekushey February posters</h2><p class="lede">Posters I made for my clients for Ekushey February (21 February) &mdash; one by one.</p><div class="car-stage" id="ekusheyStage"><div class="car-viewport"><figure class="slide active" data-brand="Coco Maya"><img src="images/ekushey/ekushey-coco-maya.jpg" alt="Ekushey February poster for Coco Maya" loading="eager"></figure>
+<figure class="slide" data-brand="Al Razzak Restaurant"><img src="images/ekushey/ekushey-al-razzak.jpg" alt="Ekushey February poster for Al Razzak Restaurant" loading="lazy"></figure>
+<figure class="slide" data-brand="Biye Bari"><img src="images/ekushey/ekushey-biye-bari.jpg" alt="Ekushey February poster for Biye Bari" loading="lazy"></figure>
+<figure class="slide" data-brand="Royal"><img src="images/ekushey/ekushey-royal-leather.jpg" alt="Ekushey February poster for Royal" loading="lazy"></figure>
+<figure class="slide" data-brand="Royal"><img src="images/ekushey/ekushey-royal-floormat.jpg" alt="Ekushey February poster for Royal" loading="lazy"></figure>
+<figure class="slide" data-brand="Sam's"><img src="images/ekushey/ekushey-sams.jpg" alt="Ekushey February poster for Sam's" loading="lazy"></figure>
+<figure class="slide" data-brand="Avant Design Studio"><img src="images/ekushey/ekushey-avant.jpg" alt="Ekushey February poster for Avant Design Studio" loading="lazy"></figure>
+<figure class="slide" data-brand="Street Oven"><img src="images/ekushey/ekushey-street-oven.jpg" alt="Ekushey February poster for Street Oven" loading="lazy"></figure>
+<figure class="slide" data-brand="Derwish Catering"><img src="images/ekushey/ekushey-derwish.jpg" alt="Ekushey February poster for Derwish Catering" loading="lazy"></figure>
+<figure class="slide" data-brand="Total Tools"><img src="images/ekushey/ekushey-total-tools.jpg" alt="Ekushey February poster for Total Tools" loading="lazy"></figure></div><button type="button" class="car-btn" id="carPrev" aria-label="Previous poster">&larr;</button><button type="button" class="car-btn" id="carNext" aria-label="Next poster">&rarr;</button></div><div class="car-nav"><span class="car-count" id="carCount">1 / 10 &middot; <b>Coco Maya</b></span><div class="car-dots"><button type="button" class="car-dot active" aria-label="Slide 1: Coco Maya"></button><button type="button" class="car-dot" aria-label="Slide 2: Al Razzak Restaurant"></button><button type="button" class="car-dot" aria-label="Slide 3: Biye Bari"></button><button type="button" class="car-dot" aria-label="Slide 4: Royal"></button><button type="button" class="car-dot" aria-label="Slide 5: Royal"></button><button type="button" class="car-dot" aria-label="Slide 6: Sam's"></button><button type="button" class="car-dot" aria-label="Slide 7: Avant Design Studio"></button><button type="button" class="car-dot" aria-label="Slide 8: Street Oven"></button><button type="button" class="car-dot" aria-label="Slide 9: Derwish Catering"></button><button type="button" class="car-dot" aria-label="Slide 10: Total Tools"></button></div></div></div></section>
 <section class="hero"><div class="wrap"><div class="hero-grid">
   <div>
     <p class="eyebrow hero-anim d1">Mohammad Noyon Mia &middot; Graphic Designer &amp; AI Creative</p>
@@ -717,6 +745,51 @@ footer{border-top:1px solid var(--line);padding:48px 0 56px}
     }
     requestAnimationFrame(tick);
   });
+})();
+
+// Ekushey carousel — auto-play one poster at a time, premium fade
+(function(){
+  var stage = document.getElementById('ekusheyStage');
+  if(!stage) return;
+  var slides = Array.prototype.slice.call(stage.querySelectorAll('.slide'));
+  var dots = Array.prototype.slice.call(document.querySelectorAll('.car-dot'));
+  var counter = document.getElementById('carCount');
+  var prev = document.getElementById('carPrev'), next = document.getElementById('carNext');
+  var cur = 0, timer = null, DELAY = 5000;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function show(i){
+    cur = (i + slides.length) % slides.length;
+    slides.forEach(function(s, k){ s.classList.toggle('active', k === cur); });
+    dots.forEach(function(d, k){
+      d.classList.toggle('active', k === cur);
+      d.setAttribute('aria-current', k === cur ? 'true' : 'false');
+    });
+    if(counter) counter.innerHTML = (cur+1) + ' / ' + slides.length + ' &middot; <b>' + slides[cur].getAttribute('data-brand') + '</b>';
+  }
+  function play(){ if(reduce) return; stop(); timer = setInterval(function(){ show(cur+1); }, DELAY); }
+  function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+  if(prev) prev.addEventListener('click', function(){ show(cur-1); play(); });
+  if(next) next.addEventListener('click', function(){ show(cur+1); play(); });
+  dots.forEach(function(d, k){ d.addEventListener('click', function(){ show(k); play(); }); });
+  stage.addEventListener('mouseenter', stop);
+  stage.addEventListener('mouseleave', play);
+  stage.addEventListener('focusin', stop);
+  stage.addEventListener('focusout', play);
+  document.addEventListener('keydown', function(e){
+    var t = e.target;
+    if(t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT')) return;
+    if(e.key === 'ArrowLeft'){ show(cur-1); play(); }
+    if(e.key === 'ArrowRight'){ show(cur+1); play(); }
+  });
+  var tx = null;
+  stage.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; stop(); }, {passive:true});
+  stage.addEventListener('touchend', function(e){
+    if(tx === null) return;
+    var dx = e.changedTouches[0].clientX - tx;
+    if(Math.abs(dx) > 40) show(dx < 0 ? cur+1 : cur-1);
+    tx = null; play();
+  }, {passive:true});
+  show(0); play();
 })();
 
 // Header shadow on scroll
