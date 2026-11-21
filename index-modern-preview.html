@@ -378,7 +378,7 @@ padding:8px 12px;font-size:15px;cursor:pointer;font-family:inherit}
 .hb-btn:hover{background:rgba(46,211,163,.9);color:var(--text)}
 #carPrev{left:22px}#carNext{right:22px}
 .hb-progress{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.18);z-index:5}
-#hbBar{display:block;height:100%;width:0;background:var(--mint);animation:hbFill 5s linear forwards}
+#hbBar{display:block;height:100%;width:0;background:var(--mint);animation:hbFill 1s linear forwards}
 @keyframes hbFill{from{width:0}to{width:100%}}
 @media (max-width:640px){.hb-stage{height:min(82vh,640px);min-height:520px}.hb-viewport{inset:0 0 128px 0}.hb-btn{width:40px;height:40px;font-size:18px}#carPrev{left:10px}#carNext{right:10px}.hb-caption{padding:16px 20px 22px}.hb-sub{display:none}}
 @media (prefers-reduced-motion: reduce){.hb-bg.on{animation:none}.hb-slide.active img{animation:none}.hb-title.anim{animation:none}#hbBar{animation:none}}
@@ -772,7 +772,7 @@ footer{border-top:1px solid var(--line);padding:48px 0 56px}
   var bar = document.getElementById('hbBar');
   var bgA = document.getElementById('hbBgA'), bgB = document.getElementById('hbBgB');
   var prev = document.getElementById('carPrev'), next = document.getElementById('carNext');
-  var cur = 0, timer = null, DELAY = 5000, bgFlip = true;
+  var cur = 0, timer = null, DELAY = 1000, bgFlip = true;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function restartBar(){
     if(!bar) return;
