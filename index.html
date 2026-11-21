@@ -350,24 +350,38 @@ padding:8px 12px;font-size:15px;cursor:pointer;font-family:inherit}
 .grid .card:nth-child(2){transition-delay:.05s}.grid .card:nth-child(3){transition-delay:.1s}.grid .card:nth-child(4){transition-delay:.15s}
 .card{transition:border-color .2s,transform .2s,box-shadow .2s}
 .card:hover{box-shadow:0 14px 34px rgba(0,0,0,.4)}
-/* Ekushey carousel — premium, one poster at a time */
-.carousel-sec{padding:72px 0 64px}
-.carousel-sec .lede{margin-bottom:30px}
-.car-stage{position:relative;max-width:780px;margin:0 auto;border-radius:28px;overflow:hidden;border:1px solid var(--line);background:#0e0e0e;box-shadow:0 30px 80px rgba(0,0,0,.55)}
-.car-viewport{position:relative;height:min(72vh,660px)}
-.slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease;pointer-events:none;margin:0}
-.slide.active{opacity:1;pointer-events:auto}
-.slide img{width:100%;height:100%;object-fit:contain;display:block}
-.car-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(11,11,11,.55);color:#fff;font-size:20px;line-height:1;cursor:pointer;backdrop-filter:blur(6px);transition:background .2s}
-.car-btn:hover{background:rgba(46,211,163,.9);color:var(--text)}
-#carPrev{left:14px}#carNext{right:14px}
-.car-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:20px;flex-wrap:wrap}
-.car-count{font-size:14px;color:var(--muted);min-width:190px;text-align:center}
-.car-count b{color:var(--text);font-weight:600}
-.car-dots{display:flex;gap:8px}
-.car-dot{width:9px;height:9px;border-radius:50%;border:0;background:rgba(255,255,255,.28);cursor:pointer;padding:0;transition:background .2s,transform .2s}
-.car-dot.active{background:var(--mint);transform:scale(1.25)}
-@media (max-width:640px){.car-viewport{height:min(62vh,500px)}.car-btn{width:38px;height:38px}}
+/* Ekushey hero banner — full-bleed, one poster at a time */
+.hero-banner{position:relative}
+.hb-stage{position:relative;height:min(94vh,880px);min-height:600px;overflow:hidden;background:#0b0b0b}
+.hb-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:blur(46px) brightness(.5) saturate(1.3);transform:scale(1.18);opacity:0;transition:opacity 1.1s ease;pointer-events:none}
+.hb-bg.on{opacity:1;animation:hbKen 14s ease-out both}
+@keyframes hbKen{from{transform:scale(1.18)}to{transform:scale(1.3)}}
+.hb-viewport{position:absolute;inset:0 0 148px 0;z-index:1}
+.hb-slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 1s ease;pointer-events:none;margin:0}
+.hb-slide.active{opacity:1;pointer-events:auto}
+.hb-slide img{height:100%;max-height:640px;width:auto;max-width:94vw;object-fit:contain;display:block;border-radius:6px;box-shadow:0 40px 100px rgba(0,0,0,.65)}
+.hb-slide.active img{animation:hbIn 1.1s cubic-bezier(.22,.61,.36,1) both}
+@keyframes hbIn{from{opacity:0;transform:scale(1.045) translateY(12px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.hb-stage::after{content:'';position:absolute;left:0;right:0;bottom:0;height:170px;background:linear-gradient(transparent,rgba(0,0,0,.6));pointer-events:none;z-index:2}
+.hb-caption{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:20px 32px 26px;max-width:1280px;margin:0 auto}
+.hb-eyebrow{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);margin:0 0 10px}
+.hb-title{font-size:clamp(34px,5vw,58px);line-height:1.05;margin:0 0 8px;color:#fff}
+.hb-title.anim{animation:hbRise .7s cubic-bezier(.22,.61,.36,1) both}
+@keyframes hbRise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hb-sub{font-size:15px;color:rgba(255,255,255,.75);margin:0}
+.hb-cap-nav{display:flex;align-items:center;gap:14px;padding-bottom:10px}
+.hb-count{font-size:13px;color:rgba(255,255,255,.85);min-width:44px;text-align:center}
+.hb-dots{display:flex;gap:8px}
+.car-dot{width:9px;height:9px;border-radius:50%;border:0;background:rgba(255,255,255,.3);cursor:pointer;padding:0;transition:background .2s,transform .2s}
+.car-dot.active{background:var(--mint);transform:scale(1.3)}
+.hb-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(11,11,11,.45);color:#fff;font-size:22px;line-height:1;cursor:pointer;backdrop-filter:blur(6px);transition:background .2s}
+.hb-btn:hover{background:rgba(46,211,163,.9);color:var(--text)}
+#carPrev{left:22px}#carNext{right:22px}
+.hb-progress{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.18);z-index:5}
+#hbBar{display:block;height:100%;width:0;background:var(--mint);animation:hbFill 5s linear forwards}
+@keyframes hbFill{from{width:0}to{width:100%}}
+@media (max-width:640px){.hb-stage{height:min(82vh,640px);min-height:520px}.hb-viewport{inset:0 0 128px 0}.hb-btn{width:40px;height:40px;font-size:18px}#carPrev{left:10px}#carNext{right:10px}.hb-caption{padding:16px 20px 22px}.hb-sub{display:none}}
+@media (prefers-reduced-motion: reduce){.hb-bg.on{animation:none}.hb-slide.active img{animation:none}.hb-title.anim{animation:none}#hbBar{animation:none}}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.hero-anim{animation:none}.js .rv{opacity:1;transform:none;transition:none}}
 .tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--ink);background:var(--mint);
 border-radius:999px;padding:3px 9px;margin-left:8px;vertical-align:2px}
@@ -473,16 +487,16 @@ footer{border-top:1px solid var(--line);padding:48px 0 56px}
 </div></div></header>
 
 <main id="top">
-<section class="carousel-sec" id="featured"><div class="wrap"><p class="eyebrow">Featured Work</p><h2>Ekushey February posters</h2><p class="lede">Posters I made for my clients for Ekushey February (21 February) &mdash; one by one.</p><div class="car-stage" id="ekusheyStage"><div class="car-viewport"><figure class="slide active" data-brand="Coco Maya"><img src="images/ekushey/ekushey-coco-maya.jpg" alt="Ekushey February poster for Coco Maya" loading="eager"></figure>
-<figure class="slide" data-brand="Al Razzak Restaurant"><img src="images/ekushey/ekushey-al-razzak.jpg" alt="Ekushey February poster for Al Razzak Restaurant" loading="lazy"></figure>
-<figure class="slide" data-brand="Biye Bari"><img src="images/ekushey/ekushey-biye-bari.jpg" alt="Ekushey February poster for Biye Bari" loading="lazy"></figure>
-<figure class="slide" data-brand="Royal"><img src="images/ekushey/ekushey-royal-leather.jpg" alt="Ekushey February poster for Royal" loading="lazy"></figure>
-<figure class="slide" data-brand="Royal"><img src="images/ekushey/ekushey-royal-floormat.jpg" alt="Ekushey February poster for Royal" loading="lazy"></figure>
-<figure class="slide" data-brand="Sam's"><img src="images/ekushey/ekushey-sams.jpg" alt="Ekushey February poster for Sam's" loading="lazy"></figure>
-<figure class="slide" data-brand="Avant Design Studio"><img src="images/ekushey/ekushey-avant.jpg" alt="Ekushey February poster for Avant Design Studio" loading="lazy"></figure>
-<figure class="slide" data-brand="Street Oven"><img src="images/ekushey/ekushey-street-oven.jpg" alt="Ekushey February poster for Street Oven" loading="lazy"></figure>
-<figure class="slide" data-brand="Derwish Catering"><img src="images/ekushey/ekushey-derwish.jpg" alt="Ekushey February poster for Derwish Catering" loading="lazy"></figure>
-<figure class="slide" data-brand="Total Tools"><img src="images/ekushey/ekushey-total-tools.jpg" alt="Ekushey February poster for Total Tools" loading="lazy"></figure></div><button type="button" class="car-btn" id="carPrev" aria-label="Previous poster">&larr;</button><button type="button" class="car-btn" id="carNext" aria-label="Next poster">&rarr;</button></div><div class="car-nav"><span class="car-count" id="carCount">1 / 10 &middot; <b>Coco Maya</b></span><div class="car-dots"><button type="button" class="car-dot active" aria-label="Slide 1: Coco Maya"></button><button type="button" class="car-dot" aria-label="Slide 2: Al Razzak Restaurant"></button><button type="button" class="car-dot" aria-label="Slide 3: Biye Bari"></button><button type="button" class="car-dot" aria-label="Slide 4: Royal"></button><button type="button" class="car-dot" aria-label="Slide 5: Royal"></button><button type="button" class="car-dot" aria-label="Slide 6: Sam's"></button><button type="button" class="car-dot" aria-label="Slide 7: Avant Design Studio"></button><button type="button" class="car-dot" aria-label="Slide 8: Street Oven"></button><button type="button" class="car-dot" aria-label="Slide 9: Derwish Catering"></button><button type="button" class="car-dot" aria-label="Slide 10: Total Tools"></button></div></div></div></section>
+<section class="hero-banner" id="featured"><div class="hb-stage" id="ekusheyStage"><div class="hb-bg on" id="hbBgA" style="background-image:url(images/ekushey/ekushey-coco-maya.jpg)"></div><div class="hb-bg" id="hbBgB"></div><div class="hb-viewport"><figure class="hb-slide active" data-brand="Coco Maya"><img src="images/ekushey/ekushey-coco-maya.jpg" alt="Ekushey February poster for Coco Maya" loading="eager"></figure>
+<figure class="hb-slide" data-brand="Al Razzak Restaurant"><img src="images/ekushey/ekushey-al-razzak.jpg" alt="Ekushey February poster for Al Razzak Restaurant" loading="lazy"></figure>
+<figure class="hb-slide" data-brand="Biye Bari"><img src="images/ekushey/ekushey-biye-bari.jpg" alt="Ekushey February poster for Biye Bari" loading="lazy"></figure>
+<figure class="hb-slide" data-brand="Royal"><img src="images/ekushey/ekushey-royal-leather.jpg" alt="Ekushey February poster for Royal" loading="lazy"></figure>
+<figure class="hb-slide" data-brand="Royal"><img src="images/ekushey/ekushey-royal-floormat.jpg" alt="Ekushey February poster for Royal" loading="lazy"></figure>
+<figure class="hb-slide" data-brand="Sam's"><img src="images/ekushey/ekushey-sams.jpg" alt="Ekushey February poster for Sam's" loading="lazy"></figure>
+<figure class="hb-slide" data-brand="Avant Design Studio"><img src="images/ekushey/ekushey-avant.jpg" alt="Ekushey February poster for Avant Design Studio" loading="lazy"></figure>
+<figure class="hb-slide" data-brand="Street Oven"><img src="images/ekushey/ekushey-street-oven.jpg" alt="Ekushey February poster for Street Oven" loading="lazy"></figure>
+<figure class="hb-slide" data-brand="Derwish Catering"><img src="images/ekushey/ekushey-derwish.jpg" alt="Ekushey February poster for Derwish Catering" loading="lazy"></figure>
+<figure class="hb-slide" data-brand="Total Tools"><img src="images/ekushey/ekushey-total-tools.jpg" alt="Ekushey February poster for Total Tools" loading="lazy"></figure></div><button type="button" class="hb-btn" id="carPrev" aria-label="Previous poster">&larr;</button><button type="button" class="hb-btn" id="carNext" aria-label="Next poster">&rarr;</button><div class="hb-caption"><div class="hb-cap-text"><p class="hb-eyebrow">Featured Work &middot; Ekushey February</p><h2 class="hb-title" id="hbTitle">Coco Maya</h2><p class="hb-sub">Ekushey February poster &mdash; 21 February</p></div><div class="hb-cap-nav"><span class="hb-count" id="carCount">1 / 10</span><div class="hb-dots"><button type="button" class="car-dot active" aria-label="Slide 1: Coco Maya"></button><button type="button" class="car-dot" aria-label="Slide 2: Al Razzak Restaurant"></button><button type="button" class="car-dot" aria-label="Slide 3: Biye Bari"></button><button type="button" class="car-dot" aria-label="Slide 4: Royal"></button><button type="button" class="car-dot" aria-label="Slide 5: Royal"></button><button type="button" class="car-dot" aria-label="Slide 6: Sam's"></button><button type="button" class="car-dot" aria-label="Slide 7: Avant Design Studio"></button><button type="button" class="car-dot" aria-label="Slide 8: Street Oven"></button><button type="button" class="car-dot" aria-label="Slide 9: Derwish Catering"></button><button type="button" class="car-dot" aria-label="Slide 10: Total Tools"></button></div></div></div><div class="hb-progress"><span id="hbBar"></span></div></div></section>
 <section class="hero"><div class="wrap"><div class="hero-grid">
   <div>
     <p class="eyebrow hero-anim d1">Mohammad Noyon Mia &middot; Graphic Designer &amp; AI Creative</p>
@@ -747,39 +761,72 @@ footer{border-top:1px solid var(--line);padding:48px 0 56px}
   });
 })();
 
-// Ekushey carousel — auto-play one poster at a time, premium fade
+// Ekushey hero banner — auto-play one poster at a time, Ken Burns backdrop + progress bar
 (function(){
   var stage = document.getElementById('ekusheyStage');
   if(!stage) return;
-  var slides = Array.prototype.slice.call(stage.querySelectorAll('.slide'));
+  var slides = Array.prototype.slice.call(stage.querySelectorAll('.hb-slide'));
   var dots = Array.prototype.slice.call(document.querySelectorAll('.car-dot'));
   var counter = document.getElementById('carCount');
+  var title = document.getElementById('hbTitle');
+  var bar = document.getElementById('hbBar');
+  var bgA = document.getElementById('hbBgA'), bgB = document.getElementById('hbBgB');
   var prev = document.getElementById('carPrev'), next = document.getElementById('carNext');
-  var cur = 0, timer = null, DELAY = 5000;
+  var cur = 0, timer = null, DELAY = 5000, bgFlip = true;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function restartBar(){
+    if(!bar) return;
+    bar.style.animation = 'none';
+    void bar.offsetWidth;
+    bar.style.animation = '';
+    bar.style.animationPlayState = 'running';
+  }
   function show(i){
     cur = (i + slides.length) % slides.length;
+    var src = slides[cur].querySelector('img').getAttribute('src');
+    var brand = slides[cur].getAttribute('data-brand');
+    var incoming = bgFlip ? bgA : bgB, outgoing = bgFlip ? bgB : bgA;
+    bgFlip = !bgFlip;
+    incoming.style.backgroundImage = 'url(' + src + ')';
+    incoming.classList.add('on');
+    outgoing.classList.remove('on');
     slides.forEach(function(s, k){ s.classList.toggle('active', k === cur); });
     dots.forEach(function(d, k){
       d.classList.toggle('active', k === cur);
       d.setAttribute('aria-current', k === cur ? 'true' : 'false');
     });
-    if(counter) counter.innerHTML = (cur+1) + ' / ' + slides.length + ' &middot; <b>' + slides[cur].getAttribute('data-brand') + '</b>';
+    if(counter) counter.textContent = (cur+1) + ' / ' + slides.length;
+    if(title){
+      title.classList.remove('anim');
+      void title.offsetWidth;
+      title.textContent = brand;
+      title.classList.add('anim');
+    }
+    restartBar();
+    play();
   }
-  function play(){ if(reduce) return; stop(); timer = setInterval(function(){ show(cur+1); }, DELAY); }
-  function stop(){ if(timer){ clearInterval(timer); timer = null; } }
-  if(prev) prev.addEventListener('click', function(){ show(cur-1); play(); });
-  if(next) next.addEventListener('click', function(){ show(cur+1); play(); });
-  dots.forEach(function(d, k){ d.addEventListener('click', function(){ show(k); play(); }); });
+  function play(){
+    if(reduce) return;
+    if(timer) clearInterval(timer);
+    timer = setInterval(function(){ show(cur+1); }, DELAY);
+    if(bar) bar.style.animationPlayState = 'running';
+  }
+  function stop(){
+    if(timer){ clearInterval(timer); timer = null; }
+    if(bar) bar.style.animationPlayState = 'paused';
+  }
+  if(prev) prev.addEventListener('click', function(){ show(cur-1); });
+  if(next) next.addEventListener('click', function(){ show(cur+1); });
+  dots.forEach(function(d, k){ d.addEventListener('click', function(){ show(k); }); });
   stage.addEventListener('mouseenter', stop);
-  stage.addEventListener('mouseleave', play);
+  stage.addEventListener('mouseleave', function(){ restartBar(); play(); });
   stage.addEventListener('focusin', stop);
-  stage.addEventListener('focusout', play);
+  stage.addEventListener('focusout', function(){ play(); });
   document.addEventListener('keydown', function(e){
     var t = e.target;
     if(t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT')) return;
-    if(e.key === 'ArrowLeft'){ show(cur-1); play(); }
-    if(e.key === 'ArrowRight'){ show(cur+1); play(); }
+    if(e.key === 'ArrowLeft'){ show(cur-1); }
+    if(e.key === 'ArrowRight'){ show(cur+1); }
   });
   var tx = null;
   stage.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; stop(); }, {passive:true});
@@ -789,7 +836,7 @@ footer{border-top:1px solid var(--line);padding:48px 0 56px}
     if(Math.abs(dx) > 40) show(dx < 0 ? cur+1 : cur-1);
     tx = null; play();
   }, {passive:true});
-  show(0); play();
+  show(0);
 })();
 
 // Header shadow on scroll
