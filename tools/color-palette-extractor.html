@@ -104,51 +104,58 @@
 }
 </script>
 <style>
-:root{--bg:#0B0B0B;--panel:#141414;--panel2:#1B1B1B;--line:rgba(255,255,255,.09);--text:#fff;--muted:#A7A7A0;--mint:#6FE8C0;--teal:#2ED3A3;--ink:#06231B}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:"Manrope",system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+:root{--bg:#0A0C0B;--panel:#121514;--panel2:#161A18;--line:rgba(255,255,255,.09);--text:#fff;--muted:#A7A7A0;--mint:#6FE8C0;--teal:#2ED3A3;--ink:#06231B;--shadow:0 18px 50px rgba(0,0,0,.45)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(900px 500px at 80% -10%,rgba(46,211,163,.12),transparent 60%),radial-gradient(700px 420px at 0% 0%,rgba(111,232,192,.07),transparent 55%),var(--bg);color:var(--text);font-family:"Manrope",system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}h1,h2,h3{font-family:"Archivo",sans-serif;margin:0;font-weight:800;letter-spacing:-.03em;line-height:1.08}
 .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
-header{position:sticky;top:0;background:rgba(11,11,11,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:10}
-.head{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
-.logo{font-family:"Archivo",sans-serif;font-weight:800;font-size:19px}.logo span{color:var(--teal)}
-nav a{margin-left:26px;font-weight:700;font-size:14.5px;color:var(--muted)}nav a:hover{color:#fff}
-.hero{padding:84px 0 30px}.eyebrow{color:var(--teal);font-size:13.5px;font-weight:800;letter-spacing:.06em;margin:0 0 16px}
-h1{font-size:clamp(38px,6vw,60px)}.lead{font-size:19px;line-height:1.65;color:#EDEDE8;max-width:760px;margin:22px 0 0}
-.card{background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:28px 30px}
-section{padding:56px 0 0}h2{font-size:clamp(28px,4vw,40px);margin-bottom:18px}
-.drop{border:2px dashed var(--teal);border-radius:16px;padding:34px 20px;text-align:center;cursor:pointer;color:#EDEDE8;font-weight:700}
+header{position:sticky;top:0;background:rgba(10,12,11,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);z-index:10}
+.head{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
+.logo{display:inline-flex;align-items:center;gap:10px;font-family:"Archivo",sans-serif;font-weight:800;font-size:19px;letter-spacing:-.02em}.logo span{color:var(--teal)}.logo .logo-mark{color:var(--ink)}
+.logo-mark{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--mint),var(--teal));color:var(--ink);font-weight:900;font-size:19px;box-shadow:0 6px 18px rgba(46,211,163,.35);flex:none}
+nav a{margin-left:8px;font-weight:700;font-size:14.5px;color:var(--muted);padding:8px 12px;border-radius:999px}nav a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.hero{padding:72px 0 26px}.eyebrow{display:inline-block;color:var(--teal);font-size:12.5px;font-weight:800;letter-spacing:.08em;margin:0 0 16px;padding:7px 13px;border:1px solid rgba(46,211,163,.35);border-radius:999px;background:rgba(46,211,163,.08)}
+h1{font-size:clamp(36px,6vw,58px)}.lead{font-size:18.5px;line-height:1.65;color:#EDEDE8;max-width:760px;margin:20px 0 0}
+.card{background:linear-gradient(180deg,#181C1A,#141716);border:1px solid var(--line);border-radius:24px;padding:30px 32px;box-shadow:var(--shadow)}
+section{padding:52px 0 0}h2{font-size:clamp(26px,4vw,38px);margin-bottom:18px}
+.drop{border:2px dashed rgba(46,211,163,.55);border-radius:20px;padding:36px 20px 30px;text-align:center;cursor:pointer;color:#EDEDE8;font-weight:700;transition:border-color .2s,background .2s;display:block}
+.drop:hover{border-color:var(--mint);background:rgba(46,211,163,.05)}
 .drop small{display:block;color:var(--muted);font-weight:600;margin-top:8px}
+.drop-icon{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:rgba(46,211,163,.12);border:1px solid rgba(46,211,163,.35);margin-bottom:14px}
 .controls{display:grid;gap:16px;margin-top:20px}
 .controls label{font-weight:700;font-size:14.5px;display:grid;gap:8px}
-.controls select,.controls input[type=number]{padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:#101010;color:var(--text);font-size:15px;font-family:inherit;width:100%}
+.controls select,.controls input[type=number],.controls input[type=text],.controls input[type=password]{padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:#0E100F;color:var(--text);font-size:15px;font-family:inherit;width:100%;transition:border-color .2s,box-shadow .2s}
+.controls select:focus,.controls input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(46,211,163,.18)}
 .controls input[type=range]{width:100%;accent-color:var(--teal)}
 .check{display:flex!important;flex-direction:row!important;align-items:center;gap:10px}
 .hint{color:var(--muted);font-size:13.5px;margin:0}
-.btn{display:inline-flex;align-items:center;gap:10px;background:var(--teal);color:var(--ink);font-weight:800;font-size:15px;padding:13px 24px;border-radius:999px;border:0;cursor:pointer;font-family:inherit}
-.btn:disabled{opacity:.45;cursor:not-allowed}
-.btn.ghost{background:transparent;color:#fff;border:1px solid var(--line)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,var(--mint),var(--teal));color:var(--ink);font-weight:800;font-size:15px;padding:13px 26px;border-radius:999px;border:0;cursor:pointer;font-family:inherit;box-shadow:0 10px 26px rgba(46,211,163,.28);transition:transform .18s,box-shadow .18s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 14px 32px rgba(46,211,163,.36)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.btn.ghost{background:rgba(255,255,255,.04);color:#fff;border:1px solid var(--line);box-shadow:none}
+.btn.ghost:hover{border-color:var(--teal);color:var(--mint)}
 #status{color:var(--mint);font-weight:700;margin:18px 0 0;min-height:24px}
 .previews{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}@media(max-width:760px){.previews{grid-template-columns:1fr}}
-.preview{background:#101010;border:1px solid var(--line);border-radius:16px;padding:16px;min-height:120px}
-.preview h3{font-size:15px;margin-bottom:12px;color:var(--muted)}
-.preview img{max-width:100%;max-height:320px;display:block;margin:0 auto;border-radius:8px}
+.preview{background:#0E100F;border:1px solid var(--line);border-radius:18px;padding:16px;min-height:120px}
+.preview h3{font-size:14px;margin-bottom:12px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.preview img{max-width:100%;max-height:320px;display:block;margin:0 auto;border-radius:10px}
 .checker{background-image:linear-gradient(45deg,#222 25%,transparent 25%),linear-gradient(-45deg,#222 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#222 75%),linear-gradient(-45deg,transparent 75%,#222 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0;background-color:#181818}
 #info{color:var(--muted);font-weight:600;margin:14px 0 0}
 .dl-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:20px}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}@media(max-width:760px){.steps{grid-template-columns:1fr}}.step b{display:block;font-family:"Archivo",sans-serif;font-size:20px;margin-bottom:8px}.step p{color:var(--muted);margin:0;font-size:15.5px}
-.faq-item{border-bottom:1px solid var(--line);padding:20px 0}.faq-item h3{font-size:19px;margin-bottom:8px}.faq-item p{color:var(--muted);margin:0}
-.other{display:flex;flex-wrap:wrap;gap:12px}.other a{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:10px 18px;font-weight:700;font-size:14.5px}.other a:hover{border-color:var(--teal);color:var(--mint)}
-footer{border-top:1px solid var(--line);margin-top:80px;padding:28px 0;color:var(--muted);font-size:14px}.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}@media(max-width:760px){.steps{grid-template-columns:1fr}}.step b{display:block;font-family:"Archivo",sans-serif;font-size:19px;margin-bottom:8px}.step p{color:var(--muted);margin:0;font-size:15px}
+.faq-item{border-bottom:1px solid var(--line);padding:20px 0}.faq-item h3{font-size:18.5px;margin-bottom:8px}.faq-item p{color:var(--muted);margin:0}
+.other{display:flex;flex-wrap:wrap;gap:12px}.other a{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:10px 18px;font-weight:700;font-size:14.5px;transition:border-color .2s}.other a:hover{border-color:var(--teal);color:var(--mint)}
+footer{border-top:1px solid var(--line);margin-top:80px;padding:30px 0;color:var(--muted);font-size:14px}.foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.foot .logo{font-size:17px}
 .crumbs{font-size:13.5px;color:var(--muted);font-weight:700}.crumbs a{color:var(--mint)}
 #palette{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}@media(max-width:760px){#palette{grid-template-columns:repeat(3,1fr)}}
-.swatch{border:1px solid var(--line);border-radius:14px;height:92px;cursor:pointer;position:relative;padding:0;overflow:hidden}
+.swatch{border:1px solid var(--line);border-radius:14px;height:92px;cursor:pointer;position:relative;padding:0;overflow:hidden;transition:transform .18s}.swatch:hover{transform:translateY(-2px)}
 .swatch span{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.65);color:#fff;font-size:12px;font-weight:800;padding:5px 4px}
 .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
 </style>
 </head>
 <body>
 <header><div class="wrap head">
-<a class="logo" href="https://design360n-sketch.github.io/">Design<span>360n</span></a>
+<a class="logo" href="https://design360n-sketch.github.io/"><span class="logo-mark">D</span>Design<span>360n</span></a>
 <nav><a href="https://design360n-sketch.github.io/">Home</a><a href="https://design360n-sketch.github.io/#services">Services</a><a href="https://design360n-sketch.github.io/#tools">Tools</a><a href="https://design360n-sketch.github.io/#contact">Contact</a></nav>
 </div></header>
 <main class="wrap">
@@ -159,7 +166,7 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:28px 0;color:var
 <p class="lead">See the colours that make a photo work. Upload any image and get its 6 main colours as hex codes — click any colour to copy it for your next design.</p>
 </div>
 <section><div class="card">
-<label class="drop" for="file">Choose an image or drop it here
+<label class="drop" for="file"><span class="drop-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6FE8C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M6 10l6-6 6 6"/><path d="M4 20h16"/></svg></span>Choose an image or drop it here
 <small>JPG, PNG or WebP — processed in your browser, never uploaded</small></label>
 <input type="file" id="file" accept="image/*" hidden>
 <div class="controls"><button class="btn" id="go">Extract palette →</button></div>
@@ -175,7 +182,7 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:28px 0;color:var
 </div></section>
 <section><h2>How to use</h2><div class="steps"><div class="card step"><b>1. Upload your image</b><p>Choose a JPG, PNG or WebP photo from your device.</p></div><div class="card step"><b>2. Get the palette</b><p>The 6 main colours appear instantly, with their hex codes.</p></div><div class="card step"><b>3. Click to copy</b><p>Click any colour to copy its hex code and use it in your design.</p></div></div></section>
 <section><h2>Questions about colour palette extractor</h2><div class="faq-item"><h3>Is this palette extractor really free?</h3><p>Yes. Free, no signup. Your photo never leaves your device.</p></div><div class="faq-item"><h3>How are the colours picked?</h3><p>The tool reads the colours in your photo and shows the 6 most common ones.</p></div><div class="faq-item"><h3>How do I use a colour in my design?</h3><p>Click a colour swatch to copy its hex code, then paste it into Photoshop, Illustrator, Canva or your website.</p></div></section>
-<section><h2>More free tools</h2><div class="other"><a href="image-upscaler.html">Image Upscaler</a><a href="background-remover.html">Background Remover</a><a href="image-compressor.html">Image Compressor</a><a href="image-converter.html">Image Converter</a><a href="image-resizer.html">Image Resizer</a></div></section>
+<section><h2>More free tools</h2><div class="other"><a href="image-upscaler.html">Image Upscaler</a><a href="ai-image-expander.html">AI Image Expander</a><a href="background-remover.html">Background Remover</a><a href="image-compressor.html">Image Compressor</a><a href="image-converter.html">Image Converter</a><a href="image-resizer.html">Image Resizer</a></div></section>
 <section><div class="card" style="text-align:center">
 <h2 style="margin-bottom:10px">Need this done professionally?</h2>
 <p style="color:var(--muted);margin:0 0 22px">These tools are free for quick jobs. For client-ready design, message me — I reply personally.</p>
@@ -184,7 +191,7 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:28px 0;color:var
 <a class="btn ghost" href="mailto:design360n@gmail.com">design360n@gmail.com</a>
 </div></div></section>
 </main>
-<footer><div class="wrap foot"><span>© 2026 Design360n — Mohammad Noyon Mia</span><span>Narsingdi, Dhaka, Bangladesh</span></div></footer>
+<footer><div class="wrap foot"><span><a class="logo" href="https://design360n-sketch.github.io/"><span class="logo-mark">D</span>Design<span>360n</span></a><br>© 2026 Design360n — Mohammad Noyon Mia</span><span>Narsingdi, Dhaka, Bangladesh</span></div></footer>
 <script>
 
 const $=id=>document.getElementById(id);
@@ -206,6 +213,51 @@ function downloadCanvas(cv,name,type,q){
 function downloadBlob(b,name){
   const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href),5000);
+}
+/* --- AI tools: shared free/paid limits (Gemini BYOK) --- */
+const AI_FREE_DAILY=3;
+function aiToday(){return new Date().toISOString().slice(0,10);}
+function aiIsPaid(){return localStorage.getItem('d360n_ai_paid')==='1';}
+function aiFreeState(){try{const s=JSON.parse(localStorage.getItem('d360n_ai_free')||'null');if(s&&s.date===aiToday())return s;}catch(e){}return {date:aiToday(),count:0};}
+function aiFreeLeft(){if(aiIsPaid())return 99;return Math.max(0,AI_FREE_DAILY-aiFreeState().count);}
+function aiUseFree(){if(aiIsPaid())return;const s=aiFreeState();s.count++;localStorage.setItem('d360n_ai_free',JSON.stringify(s));}
+function aiGate(){
+  if(aiIsPaid())return '';
+  if(aiFreeLeft()<=0)return 'Ajker 3-ta free AI use sesh — kal abar try korun, ba niche Paid key diye unlimited korun.';
+  return '';
+}
+function aiRefreshFreeUI(){
+  const el=$('freeState'); if(!el)return;
+  el.textContent=aiIsPaid()?'Unlimited ✓ — paid key active.':'Free: ajke ar '+aiFreeLeft()+'-ta AI use baki (din-e 3-ta free).';
+}
+function aiWirePaidUI(){
+  const b=$('unlockBtn'); if(!b)return;
+  const show=()=>{const s=$('paidState'); if(!s)return;
+    s.textContent=aiIsPaid()?('Paid key active ✓ — unlimited AI use. Key: '+ (localStorage.getItem('d360n_ai_paid_key')||'')):'Paid key thakle boshan — unlimited AI use paben. Key kinar jonno WhatsApp korun.';};
+  b.onclick=()=>{
+    const k=($('pkey').value||'').trim().toUpperCase();
+    if(/^D360-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(k)){
+      localStorage.setItem('d360n_ai_paid','1'); localStorage.setItem('d360n_ai_paid_key',k);
+      show(); aiRefreshFreeUI(); setStatus('Paid key active ✓ — ekhon unlimited AI use korte parben.');
+    } else setStatus('Key ta thik format-e na — D360-XXXX-XXXX format-e hobe.');
+  };
+  show();
+}
+/* Downscale >6MB inputs for the Gemini API (7MB inline limit) */
+function aiPrepInput(){
+  return new Promise(res=>{
+    if(srcFile.size<=6*1024*1024){
+      const r=new FileReader();
+      r.onload=()=>{const d=r.result;res({mime:srcFile.type||'image/png',data:d.split(',')[1]});};
+      r.readAsDataURL(srcFile);
+    } else {
+      const c=document.createElement('canvas'), m=Math.max(srcImg.naturalWidth,srcImg.naturalHeight), s=Math.min(1,2048/m);
+      c.width=Math.round(srcImg.naturalWidth*s); c.height=Math.round(srcImg.naturalHeight*s);
+      c.getContext('2d').drawImage(srcImg,0,0,c.width,c.height);
+      const d=c.toDataURL('image/jpeg',0.85);
+      res({mime:'image/jpeg',data:d.split(',')[1]});
+    }
+  });
 }
 
 
