@@ -264,6 +264,7 @@ function aiCallProxy(mode, inp, extra){
   return fetch(AI_PROXY_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(body)})
   .then(r=>{if(!r.ok)throw new Error('AI server-e pouchano jay nai — abar try korun.');return r.json();})
   .then(j=>{
+    if(j.debug)console.warn('[AI debug]', j.debug);
     if(!j.ok)throw new Error(j.reason||'AI kaj kore nai.');
     if(typeof j.freeLeft==='number')aiSyncFree(j.freeLeft);
     if(!j.image||!j.image.data)throw new Error('AI chobi banate dey nai (safety filter hote pare) — onno chobi diye try korun.');
