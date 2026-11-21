@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Free Image Upscaler Online | Design360n</title>
-<meta name="description" content="Free image upscaler online by Design360n. Enlarge 2x or 4x in your browser, or AI-upscale with Gemini using your free API key. No signup, no watermark.">
+<meta name="description" content="Free image upscaler online by Design360n. Enlarge 2x or 4x in your browser, or AI-upscale with Gemini, no key needed. No signup, no watermark.">
 <meta name="keywords" content="Image Upscaler, free image upscaler, Image Upscaler online, Noyon Mia, Design360n, Graphic Designer Bangladesh">
 <meta name="author" content="Mohammad Noyon Mia — Design360n">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://design360n-sketch.github.io/tools/image-upscaler.html">
 <meta property="og:title" content="Free Image Upscaler Online | Design360n">
-<meta property="og:description" content="Free image upscaler online by Design360n. Enlarge 2x or 4x in your browser, or AI-upscale with Gemini using your free API key. No signup, no watermark.">
+<meta property="og:description" content="Free image upscaler online by Design360n. Enlarge 2x or 4x in your browser, or AI-upscale with Gemini, no key needed. No signup, no watermark.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Design360n">
 <meta property="og:url" content="https://design360n-sketch.github.io/tools/image-upscaler.html">
@@ -24,7 +24,7 @@
       "name": "Image Upscaler",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "Any (web browser)",
-      "description": "Free image upscaler online by Design360n. Enlarge 2x or 4x in your browser, or AI-upscale with Gemini using your free API key. No signup, no watermark.",
+      "description": "Free image upscaler online by Design360n. Enlarge 2x or 4x in your browser, or AI-upscale with Gemini, no key needed. No signup, no watermark.",
       "url": "https://design360n-sketch.github.io/tools/image-upscaler.html",
       "offers": {
         "@type": "Offer",
@@ -79,7 +79,7 @@
           "name": "Is this image upscaler really free?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Fast mode is free with no signup and no watermark. AI mode is free for 3 uses a day across the AI tools (upscale + expand), using your own free Gemini API key — Google’s free tier allows about 500 images a day, no card needed. A paid key gives unlimited AI use."
+            "text": "Yes. Fast mode is free with no signup and no watermark. AI mode is free for 3 uses a day across the AI tools (upscale, expand and AI backgrounds) — no key needed, it runs on Design360n’s server. A $1/month paid key gives unlimited AI use."
           }
         },
         {
@@ -87,7 +87,7 @@
           "name": "How do I get unlimited AI use?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Enter your Design360n paid license key (D360-XXXX-XXXX) in the Paid key box and click Unlock unlimited. No key yet? Tap Buy paid key to order one on WhatsApp."
+            "text": "Buy AI Tools Unlimited ($1/month) from the homepage, then enter your Design360n paid license key (D360-XXXX-XXXX) in the Paid key box and click Unlock unlimited."
           }
         },
         {
@@ -188,24 +188,16 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:30px 0;color:var
 <small>JPG, PNG or WebP — processed in your browser, never uploaded</small></label>
 <input type="file" id="file" accept="image/*" hidden>
 <div class="controls"><label>Mode
-        <select id="mode"><option value="fast">Fast — in-browser (2x / 4x)</option><option value="ai">AI — Gemini (free key)</option></select></label>
+        <select id="mode"><option value="fast">Fast — in-browser (2x / 4x)</option><option value="ai">AI — Gemini (no key needed)</option></select></label>
         <label>Enlarge by
         <select id="scale"><option value="2">2x — double size</option><option value="4">4x — four times bigger</option></select></label>
         <div id="keyBox" style="display:none">
-      <label>Your free Gemini API key
-      <input id="gkey" type="password" placeholder="AIza..." autocomplete="off" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0f1417;color:var(--ink);margin-top:6px"></label>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
-      <button class="btn ghost" id="saveKey" type="button">Save key in this browser</button>
-      <button class="btn ghost" id="delKey" type="button" style="display:none">Remove key</button>
-      <a class="btn ghost" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Get a free key ↗</a>
-      </div>
-      <p class="hint" id="keyState">Your key stays only in your browser — it is never sent to Design360n. Free tier: about 500 images a day.</p>
       <p class="hint" id="freeState"></p>
-      <label style="margin-top:10px">Paid license key — unlimited AI use
+      <label style="margin-top:10px">Paid license key — unlimited AI use ($1/month)
       <input id="pkey" type="text" placeholder="D360-XXXX-XXXX" autocomplete="off" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0f1417;color:var(--ink);margin-top:6px"></label>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
       <button class="btn ghost" id="unlockBtn" type="button">Unlock unlimited</button>
-      <a class="btn ghost" href="https://wa.me/8801799137986?text=Assalamu%20Alaikum%2C%20ami%20AI%20Tools%20Unlimited%20kinte%20chai." target="_blank" rel="noopener">Buy paid key ↗</a>
+      <a class="btn ghost" href="https://design360n-sketch.github.io/#extensions" target="_blank" rel="noopener">Buy $1/month ↗</a>
       </div>
       <p class="hint" id="paidState"></p>
       </div>
@@ -222,7 +214,7 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:30px 0;color:var
 <a class="btn ghost" href="https://design360n-sketch.github.io/#contact">Need a designer? Contact me →</a></div>
 </div></section>
 <section><h2>How to use</h2><div class="steps"><div class="card step"><b>1. Upload your image</b><p>Choose a JPG, PNG or WebP photo from your device.</p></div><div class="card step"><b>2. Pick a mode</b><p>Fast mode enlarges 2x or 4x in your browser. AI mode upscales with Gemini — get a free key from Google AI Studio and save it in your browser.</p></div><div class="card step"><b>3. Download the PNG</b><p>Save the enlarged image and use it anywhere — print, post or profile.</p></div></div></section>
-<section><h2>Questions about image upscaler</h2><div class="faq-item"><h3>Is this image upscaler really free?</h3><p>Yes. Fast mode is free with no signup and no watermark. AI mode is free for 3 uses a day across the AI tools (upscale + expand), using your own free Gemini API key — Google’s free tier allows about 500 images a day, no card needed. A paid key gives unlimited AI use.</p></div><div class="faq-item"><h3>How do I get unlimited AI use?</h3><p>Enter your Design360n paid license key (D360-XXXX-XXXX) in the Paid key box and click Unlock unlimited. No key yet? Tap Buy paid key to order one on WhatsApp.</p></div><div class="faq-item"><h3>How big is the AI result?</h3><p>Gemini (Nano Banana) returns about 1024px on the long side, so AI mode is best for small photos. For big photos use Fast mode (2x / 4x).</p></div><div class="faq-item"><h3>Will upscaling make my photo sharper?</h3><p>Fast mode makes the photo bigger with smooth high-quality resizing, but it cannot add detail that was never in the original photo. AI mode regenerates the image with Gemini, so it can add detail — and it can also change small details.</p></div><div class="faq-item"><h3>Does the AI result have a watermark?</h3><p>Google adds an invisible SynthID watermark to AI-generated and AI-edited images. You cannot see it — it only marks the image as AI-made.</p></div></section>
+<section><h2>Questions about image upscaler</h2><div class="faq-item"><h3>Is this image upscaler really free?</h3><p>Yes. Fast mode is free with no signup and no watermark. AI mode is free for 3 uses a day across the AI tools (upscale, expand and AI backgrounds) — no key needed, it runs on Design360n’s server. A $1/month paid key gives unlimited AI use.</p></div><div class="faq-item"><h3>How do I get unlimited AI use?</h3><p>Buy AI Tools Unlimited ($1/month) from the homepage, then enter your Design360n paid license key (D360-XXXX-XXXX) in the Paid key box and click Unlock unlimited.</p></div><div class="faq-item"><h3>How big is the AI result?</h3><p>Gemini (Nano Banana) returns about 1024px on the long side, so AI mode is best for small photos. For big photos use Fast mode (2x / 4x).</p></div><div class="faq-item"><h3>Will upscaling make my photo sharper?</h3><p>Fast mode makes the photo bigger with smooth high-quality resizing, but it cannot add detail that was never in the original photo. AI mode regenerates the image with Gemini, so it can add detail — and it can also change small details.</p></div><div class="faq-item"><h3>Does the AI result have a watermark?</h3><p>Google adds an invisible SynthID watermark to AI-generated and AI-edited images. You cannot see it — it only marks the image as AI-made.</p></div></section>
 <section><h2>More free tools</h2><div class="other"><a href="ai-image-expander.html">AI Image Expander</a><a href="background-remover.html">Background Remover</a><a href="image-compressor.html">Image Compressor</a><a href="image-converter.html">Image Converter</a><a href="image-resizer.html">Image Resizer</a><a href="color-palette-extractor.html">Colour Palette Extractor</a></div></section>
 <section><div class="card" style="text-align:center">
 <h2 style="margin-bottom:10px">Need this done professionally?</h2>
@@ -255,34 +247,54 @@ function downloadBlob(b,name){
   const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href),5000);
 }
-/* --- AI tools: shared free/paid limits (Gemini BYOK) --- */
+/* --- AI tools: Design360n server proxy (Gemini key lives on the server) --- */
+/* No visitor key needed. Free: 3 AI uses/day per device (server counts).
+   Paid: D360 key ($1/month) -> unlimited. Server falls back Gemini -> Gemini
+   key 2 -> Clipdrop, so the tools keep working if one provider is down. */
+const AI_PROXY_URL='https://script.google.com/macros/s/AKfycbx5HH2LS6FDoHpnKoIM9tDYfNqQ1CxXCe2iFO1MColMUSpacgwnzdO95mwoyLHFovtvvw/exec';
 const AI_FREE_DAILY=3;
 function aiToday(){return new Date().toISOString().slice(0,10);}
 function aiIsPaid(){return localStorage.getItem('d360n_ai_paid')==='1';}
+function aiDeviceId(){let d=localStorage.getItem('d360n_ai_device');if(!d){d='d'+Math.random().toString(16).slice(2,10)+Date.now().toString(16);localStorage.setItem('d360n_ai_device',d);}return d;}
 function aiFreeState(){try{const s=JSON.parse(localStorage.getItem('d360n_ai_free')||'null');if(s&&s.date===aiToday())return s;}catch(e){}return {date:aiToday(),count:0};}
 function aiFreeLeft(){if(aiIsPaid())return 99;return Math.max(0,AI_FREE_DAILY-aiFreeState().count);}
-function aiUseFree(){if(aiIsPaid())return;const s=aiFreeState();s.count++;localStorage.setItem('d360n_ai_free',JSON.stringify(s));}
+function aiSyncFree(left){if(typeof left!=='number')return;const s=aiFreeState();s.count=Math.max(0,AI_FREE_DAILY-left);localStorage.setItem('d360n_ai_free',JSON.stringify(s));aiRefreshFreeUI();}
 function aiGate(){
   if(aiIsPaid())return '';
-  if(aiFreeLeft()<=0)return 'Ajker 3-ta free AI use sesh — kal abar try korun, ba niche Paid key diye unlimited korun.';
+  if(aiFreeLeft()<=0)return 'Ajker 3-ta free AI use sesh — kal abar try korun, ba $1/month-e unlimited nin (niche Buy korun).';
   return '';
 }
 function aiRefreshFreeUI(){
   const el=$('freeState'); if(!el)return;
-  el.textContent=aiIsPaid()?'Unlimited ✓ — paid key active.':'Free: ajke ar '+aiFreeLeft()+'-ta AI use baki (din-e 3-ta free).';
+  el.textContent=aiIsPaid()?'Unlimited ✓ — paid key active ($1/month).':'Free: ajke ar '+aiFreeLeft()+'-ta AI use baki (din-e 3-ta free).';
 }
 function aiWirePaidUI(){
   const b=$('unlockBtn'); if(!b)return;
   const show=()=>{const s=$('paidState'); if(!s)return;
-    s.textContent=aiIsPaid()?('Paid key active ✓ — unlimited AI use. Key: '+ (localStorage.getItem('d360n_ai_paid_key')||'')):'Paid key thakle boshan — unlimited AI use paben. Key kinar jonno WhatsApp korun.';};
+    s.textContent=aiIsPaid()?('Paid key active ✓ — unlimited AI use ($1/month). Key: '+ (localStorage.getItem('d360n_ai_paid_key')||'')):'Paid key thakle boshan — unlimited AI use paben ($1/month). Key kinte chaile niche Buy korun.';};
   b.onclick=()=>{
     const k=($('pkey').value||'').trim().toUpperCase();
-    if(/^D360-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(k)){
-      localStorage.setItem('d360n_ai_paid','1'); localStorage.setItem('d360n_ai_paid_key',k);
-      show(); aiRefreshFreeUI(); setStatus('Paid key active ✓ — ekhon unlimited AI use korte parben.');
-    } else setStatus('Key ta thik format-e na — D360-XXXX-XXXX format-e hobe.');
+    if(!/^D360-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(k)){setStatus('Key ta thik format-e na — D360-XXXX-XXXX format-e hobe.');return;}
+    setStatus('Key check hocche…');
+    fetch(AI_PROXY_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'verifyKey',key:k})})
+    .then(r=>{if(!r.ok)throw new Error('net');return r.json();}).then(j=>{
+      if(j.ok){localStorage.setItem('d360n_ai_paid','1');localStorage.setItem('d360n_ai_paid_key',k);show();aiRefreshFreeUI();setStatus('Paid key active ✓ — ekhon unlimited AI use korte parben.');}
+      else setStatus('✗ '+(j.reason||'Key ta kaj kortese na.'));
+    }).catch(()=>setStatus('Key check kora jay nai — connection check kore abar try korun.'));
   };
   show();
+}
+/* One AI call through the Design360n server. Returns {mimeType,data}. */
+function aiCallProxy(mode, inp, extra){
+  const body=Object.assign({action:'gemini',mode:mode,device:aiDeviceId(),key:localStorage.getItem('d360n_ai_paid_key')||'',mime:inp.mime,data:inp.data}, extra||{});
+  return fetch(AI_PROXY_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(body)})
+  .then(r=>{if(!r.ok)throw new Error('AI server-e pouchano jay nai — abar try korun.');return r.json();})
+  .then(j=>{
+    if(!j.ok)throw new Error(j.reason||'AI kaj kore nai.');
+    if(typeof j.freeLeft==='number')aiSyncFree(j.freeLeft);
+    if(!j.image||!j.image.data)throw new Error('AI chobi banate dey nai (safety filter hote pare) — onno chobi diye try korun.');
+    return j.image;
+  });
 }
 /* Downscale >6MB inputs for the Gemini API (7MB inline limit) */
 function aiPrepInput(){
@@ -315,30 +327,14 @@ function closestAR(w,h){
   return best[0];
 }
 function aiUpscale(){
-  const key=((localStorage.getItem('d360n_gemini_key')||'').trim()||$('gkey').value.trim());
-  if(!key){setStatus('Age upore "Get a free key" theke free Gemini API key nin, tarpor Save korun.');return;}
   if(!srcFile){setStatus('Age ekta chobi upload korun.');return;}
   const gate=aiGate(); if(gate){setStatus(gate);return;}
   setStatus('AI upscale cholche — 10 theke 30 second lagte pare…');
   $('go').disabled=true;
   aiPrepInput().then(inp=>{
     const ar=closestAR(srcImg.naturalWidth,srcImg.naturalHeight);
-    return fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent?key='+encodeURIComponent(key),{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({contents:[{parts:[{text:'Upscale and enhance this image to high resolution. Keep the exact same composition, subject, colours and details — only increase the resolution and sharpness. Do not change, add or remove anything.'},{inlineData:{mimeType:inp.mime,data:inp.data}}]}],generationConfig:{responseModalities:['TEXT','IMAGE'],imageConfig:{aspectRatio:ar}}})
-    });
-  }).then(r=>{
-    if(!r.ok){return r.json().then(j=>{const e=(j.error&&j.error.message)||('HTTP '+r.status);
-      if(r.status===400) throw new Error('Key ta thik na — "Get a free key" theke notun key niye abar try korun.');
-      if(r.status===429) throw new Error('Free limit sesh (daily quota) — kal abar try korun, ba Fast mode use korun.');
-      throw new Error('Gemini error: '+e);});}
-    return r.json();
-  }).then(j=>{
-    const cand=(j.candidates||[])[0];
-    const parts=(cand&&cand.content&&cand.content.parts)||[];
-    let img=null;
-    parts.forEach(p=>{if(p.inlineData&&p.inlineData.data) img=p.inlineData;});
-    if(!img) throw new Error('Gemini chobi banate dey nai (safety filter hote pare) — onno chobi diye try korun, ba Fast mode use korun.');
+    return aiCallProxy('upscale', inp, {aspectRatio:ar, width:srcImg.naturalWidth, height:srcImg.naturalHeight});
+  }).then(img=>{
     const url='data:'+(img.mimeType||'image/png')+';base64,'+img.data;
     const im=new Image();
     im.onload=()=>{
@@ -349,20 +345,13 @@ function aiUpscale(){
       $('afterWrap').style.display='block';
       $('info').textContent='AI upscale done — '+outCv.width+' × '+outCv.height+' px (Gemini output ~1024px). Boro chobir jonno Fast mode valo.';
       $('dl').disabled=false;
-      aiUseFree(); aiRefreshFreeUI();
+      aiRefreshFreeUI();
       setStatus('AI upscale done ✓');
     };
     im.onerror=()=>{setStatus('✗ AI result load hoy nai — abar try korun.');};
     im.src=url;
   }).catch(err=>{setStatus('✗ '+err.message);}).finally(()=>{$('go').disabled=false;});
 }
-function refreshKeyUI(){
-  const k=localStorage.getItem('d360n_gemini_key');
-  if(k){$('gkey').value=k;$('keyState').textContent='Key save kora ache ei browser-e ✓ — key sudhu apnar browser-e thake, Design360n-e pathano hoy na.';$('delKey').style.display='';}
-  else{$('keyState').textContent='Apnar key sudhu apnar browser-e thakbe — Design360n-er server-e kokhono jabe na. Free tier: din-e pray 500-ta chobi.';$('delKey').style.display='none';}
-}
-$('saveKey').onclick=()=>{const k=$('gkey').value.trim();if(!k){setStatus('Key khali — age key paste korun.');return;}localStorage.setItem('d360n_gemini_key',k);refreshKeyUI();setStatus('Key save holo ✓');};
-$('delKey').onclick=()=>{localStorage.removeItem('d360n_gemini_key');$('gkey').value='';refreshKeyUI();setStatus('Key muche fela holo.');};
 $('mode').onchange=()=>{
   const ai=$('mode').value==='ai';
   $('keyBox').style.display=ai?'block':'none';

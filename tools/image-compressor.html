@@ -221,34 +221,54 @@ function downloadBlob(b,name){
   const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href),5000);
 }
-/* --- AI tools: shared free/paid limits (Gemini BYOK) --- */
+/* --- AI tools: Design360n server proxy (Gemini key lives on the server) --- */
+/* No visitor key needed. Free: 3 AI uses/day per device (server counts).
+   Paid: D360 key ($1/month) -> unlimited. Server falls back Gemini -> Gemini
+   key 2 -> Clipdrop, so the tools keep working if one provider is down. */
+const AI_PROXY_URL='https://script.google.com/macros/s/AKfycbx5HH2LS6FDoHpnKoIM9tDYfNqQ1CxXCe2iFO1MColMUSpacgwnzdO95mwoyLHFovtvvw/exec';
 const AI_FREE_DAILY=3;
 function aiToday(){return new Date().toISOString().slice(0,10);}
 function aiIsPaid(){return localStorage.getItem('d360n_ai_paid')==='1';}
+function aiDeviceId(){let d=localStorage.getItem('d360n_ai_device');if(!d){d='d'+Math.random().toString(16).slice(2,10)+Date.now().toString(16);localStorage.setItem('d360n_ai_device',d);}return d;}
 function aiFreeState(){try{const s=JSON.parse(localStorage.getItem('d360n_ai_free')||'null');if(s&&s.date===aiToday())return s;}catch(e){}return {date:aiToday(),count:0};}
 function aiFreeLeft(){if(aiIsPaid())return 99;return Math.max(0,AI_FREE_DAILY-aiFreeState().count);}
-function aiUseFree(){if(aiIsPaid())return;const s=aiFreeState();s.count++;localStorage.setItem('d360n_ai_free',JSON.stringify(s));}
+function aiSyncFree(left){if(typeof left!=='number')return;const s=aiFreeState();s.count=Math.max(0,AI_FREE_DAILY-left);localStorage.setItem('d360n_ai_free',JSON.stringify(s));aiRefreshFreeUI();}
 function aiGate(){
   if(aiIsPaid())return '';
-  if(aiFreeLeft()<=0)return 'Ajker 3-ta free AI use sesh — kal abar try korun, ba niche Paid key diye unlimited korun.';
+  if(aiFreeLeft()<=0)return 'Ajker 3-ta free AI use sesh — kal abar try korun, ba $1/month-e unlimited nin (niche Buy korun).';
   return '';
 }
 function aiRefreshFreeUI(){
   const el=$('freeState'); if(!el)return;
-  el.textContent=aiIsPaid()?'Unlimited ✓ — paid key active.':'Free: ajke ar '+aiFreeLeft()+'-ta AI use baki (din-e 3-ta free).';
+  el.textContent=aiIsPaid()?'Unlimited ✓ — paid key active ($1/month).':'Free: ajke ar '+aiFreeLeft()+'-ta AI use baki (din-e 3-ta free).';
 }
 function aiWirePaidUI(){
   const b=$('unlockBtn'); if(!b)return;
   const show=()=>{const s=$('paidState'); if(!s)return;
-    s.textContent=aiIsPaid()?('Paid key active ✓ — unlimited AI use. Key: '+ (localStorage.getItem('d360n_ai_paid_key')||'')):'Paid key thakle boshan — unlimited AI use paben. Key kinar jonno WhatsApp korun.';};
+    s.textContent=aiIsPaid()?('Paid key active ✓ — unlimited AI use ($1/month). Key: '+ (localStorage.getItem('d360n_ai_paid_key')||'')):'Paid key thakle boshan — unlimited AI use paben ($1/month). Key kinte chaile niche Buy korun.';};
   b.onclick=()=>{
     const k=($('pkey').value||'').trim().toUpperCase();
-    if(/^D360-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(k)){
-      localStorage.setItem('d360n_ai_paid','1'); localStorage.setItem('d360n_ai_paid_key',k);
-      show(); aiRefreshFreeUI(); setStatus('Paid key active ✓ — ekhon unlimited AI use korte parben.');
-    } else setStatus('Key ta thik format-e na — D360-XXXX-XXXX format-e hobe.');
+    if(!/^D360-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(k)){setStatus('Key ta thik format-e na — D360-XXXX-XXXX format-e hobe.');return;}
+    setStatus('Key check hocche…');
+    fetch(AI_PROXY_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'verifyKey',key:k})})
+    .then(r=>{if(!r.ok)throw new Error('net');return r.json();}).then(j=>{
+      if(j.ok){localStorage.setItem('d360n_ai_paid','1');localStorage.setItem('d360n_ai_paid_key',k);show();aiRefreshFreeUI();setStatus('Paid key active ✓ — ekhon unlimited AI use korte parben.');}
+      else setStatus('✗ '+(j.reason||'Key ta kaj kortese na.'));
+    }).catch(()=>setStatus('Key check kora jay nai — connection check kore abar try korun.'));
   };
   show();
+}
+/* One AI call through the Design360n server. Returns {mimeType,data}. */
+function aiCallProxy(mode, inp, extra){
+  const body=Object.assign({action:'gemini',mode:mode,device:aiDeviceId(),key:localStorage.getItem('d360n_ai_paid_key')||'',mime:inp.mime,data:inp.data}, extra||{});
+  return fetch(AI_PROXY_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(body)})
+  .then(r=>{if(!r.ok)throw new Error('AI server-e pouchano jay nai — abar try korun.');return r.json();})
+  .then(j=>{
+    if(!j.ok)throw new Error(j.reason||'AI kaj kore nai.');
+    if(typeof j.freeLeft==='number')aiSyncFree(j.freeLeft);
+    if(!j.image||!j.image.data)throw new Error('AI chobi banate dey nai (safety filter hote pare) — onno chobi diye try korun.');
+    return j.image;
+  });
 }
 /* Downscale >6MB inputs for the Gemini API (7MB inline limit) */
 function aiPrepInput(){
