@@ -480,6 +480,31 @@ footer{border-top:1px solid var(--line);padding:48px 0 56px}
   .hb-cap-nav{padding-bottom:0}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* reviews */
+.rev-summary{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-top:18px}
+.rev-avg{font-size:44px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.rev-avg small{font-size:18px;color:var(--muted);font-weight:700}
+.rev-count{color:var(--muted);font-size:15px}
+.rev-stars{color:var(--mint);font-size:22px;letter-spacing:2px}
+.rev-list{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px}
+.rev-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.rev-card .rev-stars{font-size:16px}
+.rev-card h3{margin-top:8px}
+.rev-card p{color:var(--muted);font-size:15px;margin-top:8px}
+.rev-meta{color:var(--muted);font-size:13px;margin-top:12px}
+.rev-empty{color:var(--muted);margin-top:28px}
+.rev-form{background:var(--panel2);border:1px solid var(--line);border-radius:var(--radius);padding:28px;margin-top:36px}
+.rev-form h3{margin-bottom:6px}
+.rev-form .bsub{color:var(--muted);font-size:15px}
+.rev-form label{display:block;font-weight:700;font-size:14px;margin:16px 0 6px}
+.rev-form input,.rev-form select,.rev-form textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:12px;color:var(--text);font:inherit;font-size:15px;padding:12px 14px}
+.rev-form textarea{min-height:110px;resize:vertical}
+.rev-form input:focus,.rev-form select:focus,.rev-form textarea:focus{outline:2px solid var(--mint);outline-offset:1px}
+.star-pick{display:flex;gap:6px;margin-top:4px}
+.star-pick button{background:none;border:0;color:var(--muted);font-size:28px;line-height:1;cursor:pointer;padding:2px}
+.star-pick button.on{color:var(--mint)}
+.rev-grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+@media(max-width:640px){.rev-list,.rev-grid2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -491,6 +516,7 @@ footer{border-top:1px solid var(--line);padding:48px 0 56px}
     <a href="#tools">Tools</a>
     <a href="#projects">Work</a>
     <a href="#extensions">Extensions</a>
+    <a href="#reviews">Reviews</a>
     <a href="#faq">FAQ</a>
   </nav>
   <a class="btn btn-sm" href="#contact" style="margin-left:auto">Let&rsquo;s Talk &nearr;</a>
@@ -675,6 +701,54 @@ footer{border-top:1px solid var(--line);padding:48px 0 56px}
       <button class="btn" type="button" id="orderSubmitBtn" style="margin-top:18px">Submit order &rarr;</button>
       <p id="payResult" role="status"></p>
     </div>
+  </div>
+</div></section>
+
+<section id="reviews"><div class="wrap">
+  <p class="eyebrow">Reviews</p>
+  <h2>What clients say</h2>
+  <p class="lede">Kaj korechen ba extension use korechen? Apnar review ta ekhane likhun — eta onnoder help korbe.</p>
+  <div class="rev-summary">
+    <span class="rev-avg"><span id="revAvg">–</span><small> / 5</small></span>
+    <span class="rev-stars" id="revAvgStars" aria-hidden="true"></span>
+    <span class="rev-count" id="revCount"></span>
+  </div>
+  <div class="rev-list" id="revList"></div>
+  <p class="rev-empty" id="revEmpty" hidden>Ekono kono review nei — prothom review ta apni din.</p>
+
+  <div class="rev-form">
+    <h3>Write a review</h3>
+    <p class="bsub">Apnar nam, rating ar review likhun — submit korlei ekhane dekhabe.</p>
+    <form id="revForm" novalidate>
+      <div class="rev-grid2">
+        <div>
+          <label for="revName">Your name *</label>
+          <input required id="revName" autocomplete="name" placeholder="Your name">
+        </div>
+        <div>
+          <label for="revProduct">Kiser review? *</label>
+          <select id="revProduct" required>
+            <option>Design service</option>
+            <option>Design360n Extension</option>
+            <option>Design360n Workstation</option>
+            <option>AI Tools Unlimited</option>
+            <option>Free tools</option>
+          </select>
+        </div>
+      </div>
+      <label>Rating *</label>
+      <div class="star-pick" id="revStars" role="radiogroup" aria-label="Rating">
+        <button type="button" data-v="1" aria-label="1 star">&#9733;</button>
+        <button type="button" data-v="2" aria-label="2 stars">&#9733;</button>
+        <button type="button" data-v="3" aria-label="3 stars">&#9733;</button>
+        <button type="button" data-v="4" aria-label="4 stars">&#9733;</button>
+        <button type="button" data-v="5" aria-label="5 stars">&#9733;</button>
+      </div>
+      <label for="revText">Your review *</label>
+      <textarea required id="revText" placeholder="Kaj ta kemon chilo, likhun..."></textarea>
+      <button class="btn" type="submit" style="margin-top:18px">Submit review &rarr;</button>
+      <p id="revResult" role="status" style="margin-top:12px;color:var(--mint)"></p>
+    </form>
   </div>
 </div></section>
 
@@ -1019,6 +1093,102 @@ if(orderSubmitBtn){
     });
   });
 }
+// Reviews — stored in this browser (localStorage); shown on this device
+(function(){
+  var KEY = 'design360n_reviews_v1';
+  var listEl = document.getElementById('revList');
+  var emptyEl = document.getElementById('revEmpty');
+  var avgEl = document.getElementById('revAvg');
+  var avgStarsEl = document.getElementById('revAvgStars');
+  var countEl = document.getElementById('revCount');
+  if(!listEl) return;
+  function load(){
+    try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(e){ return []; }
+  }
+  function save(list){
+    try { localStorage.setItem(KEY, JSON.stringify(list)); } catch(e){}
+  }
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function stars(n){
+    var out = '';
+    for(var i=1;i<=5;i++){ out += i<=n ? '\u2605' : '\u2606'; }
+    return out;
+  }
+  function render(){
+    var list = load().slice().reverse();
+    listEl.innerHTML = '';
+    if(!list.length){
+      emptyEl.hidden = false;
+      avgEl.textContent = '\u2013';
+      avgStarsEl.textContent = '';
+      countEl.textContent = 'No reviews yet';
+      return;
+    }
+    emptyEl.hidden = true;
+    var sum = 0;
+    list.forEach(function(r){ sum += r.rating; });
+    var avg = sum / list.length;
+    avgEl.textContent = (Math.round(avg*10)/10).toString().replace('.', '.');
+    avgStarsEl.textContent = stars(Math.round(avg));
+    countEl.textContent = list.length + (list.length === 1 ? ' review' : ' reviews');
+    list.forEach(function(r){
+      var card = document.createElement('div');
+      card.className = 'rev-card';
+      card.innerHTML = '<span class="rev-stars">' + stars(r.rating) + '</span>' +
+        '<h3>' + esc(r.name) + '</h3>' +
+        '<p>' + esc(r.text) + '</p>' +
+        '<p class="rev-meta">' + esc(r.product) + ' &middot; ' + esc(r.date) + '</p>';
+      listEl.appendChild(card);
+    });
+  }
+  var picked = 0;
+  var starBtns = Array.prototype.slice.call(document.querySelectorAll('#revStars button'));
+  function paintStars(){
+    starBtns.forEach(function(b){
+      b.classList.toggle('on', parseInt(b.getAttribute('data-v'), 10) <= picked);
+    });
+  }
+  starBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      picked = parseInt(b.getAttribute('data-v'), 10);
+      paintStars();
+    });
+  });
+  var form = document.getElementById('revForm');
+  var result = document.getElementById('revResult');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('revName').value.trim();
+    var product = document.getElementById('revProduct').value;
+    var text = document.getElementById('revText').value.trim();
+    if(!name || !text || !picked){
+      result.textContent = 'Nam, rating ar review — tin tai dite hobe.';
+      result.style.color = '';
+      return;
+    }
+    var list = load();
+    list.push({
+      name: name,
+      product: product,
+      rating: picked,
+      text: text,
+      date: new Date().toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'})
+    });
+    save(list);
+    render();
+    form.reset();
+    picked = 0;
+    paintStars();
+    result.textContent = 'Dhonnobad! Apnar review ta joma hoyeche.';
+    result.style.color = 'var(--mint)';
+  });
+  render();
+})();
+
 </script>
 </body>
 </html>
